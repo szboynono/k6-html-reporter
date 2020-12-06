@@ -1,3 +1,3 @@
-export function generate(options: any) {
+export function generate(options: Options) {
   console.log(options);
 }
