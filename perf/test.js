@@ -1,7 +1,7 @@
 const reporter = require('../dist/index.js');
 
 const options = {
-  jsonFile: './export.json',
-  output: './',
+  jsonFile: 'perf/export.json',
+  output: 'perf/',
 }
 reporter.generateSummaryReport(options);
