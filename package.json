@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc",
+    "dev": "tsc && cd dev && node index.js",
     "start": "ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
