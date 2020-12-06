@@ -1,0 +1,27 @@
+{
+  "name": "k6-html-reporter",
+  "version": "1.0.0",
+  "description": "A html reporter for k6",
+  "main": "dist/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "ts-node": "^9.1.0",
+    "typescript": "^4.1.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szboynono/k6-html-reporter.git"
+  },
+  "keywords": ["report", "k6"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szboynono/k6-html-reporter/issues"
+  },
+  "homepage": "https://github.com/szboynono/k6-html-reporter#readme"
+}
