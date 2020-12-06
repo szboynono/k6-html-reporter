@@ -17,7 +17,10 @@
     "type": "git",
     "url": "git+https://github.com/szboynono/k6-html-reporter.git"
   },
-  "keywords": ["report", "k6"],
+  "keywords": [
+    "report",
+    "k6"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
