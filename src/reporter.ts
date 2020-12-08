@@ -18,39 +18,19 @@ function readJsonReport(filePath: string): JSON {
 }
 
 function writeHtmlReport(content: JSON, filePath: string): void {
-  const template = `
-  <!DOCTYPE html>
-  <html>
+  const templatePath = path.resolve(__dirname, '../templates/template.ejs');
+  const groups = content["root_group"]["groups"];
 
-  <head>
-      <title>K6 Summary Report</title>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-  </head>
+  ejs.renderFile(templatePath, { groups: groups }, {}, function (err, str) {
+    if (err) {
+      console.error(err);
+    }
 
-  <body>
-      <div class="container">
-          <div class="jumbotron jumbotron-fluid bg-white">
-              <div class="container">
-                  <h1 class="display-4">K6 Summary Report</h1>
-                  <p class="lead">Powered by k6-html-reporter</p>
-              </div>
-          </div>
-      </div>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-          crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-          crossorigin="anonymous"></script>
-  </body>
 
-  </html>
-  `
-
-  let html = ejs.render(template, { jsonReport: content });
-  fs.writeFile(`${filePath}/report.html`, html, function (err) {
-    if (err) throw err;
-    console.log(`Report is created at ${filePath}`);
+    let html = ejs.render(str);
+    fs.writeFile(`${filePath}/report.html`, html, function (err) {
+      if (err) throw err;
+      console.log(`Report is created at ${filePath}`);
+    });
   });
 }
