@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import ejs from 'ejs';
+import { group } from 'console';
 
 export function generate(options: Options) {
   const resolvedInputPath = path.resolve(process.cwd(), options.jsonFile);
@@ -19,13 +20,13 @@ function readJsonReport(filePath: string): JSON {
 
 function writeHtmlReport(content: JSON, filePath: string): void {
   const templatePath = path.resolve(__dirname, '../templates/template.ejs');
-  const groups = content["root_group"]["groups"];
-
-  ejs.renderFile(templatePath, { groups: groups }, {}, function (err, str) {
+  const data = content["root_group"];
+  
+  getChecks(data);
+  ejs.renderFile(templatePath, { data: data }, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
-
 
     let html = ejs.render(str);
     fs.writeFile(`${filePath}/report.html`, html, function (err) {
@@ -33,4 +34,24 @@ function writeHtmlReport(content: JSON, filePath: string): void {
       console.log(`Report is created at ${filePath}`);
     });
   });
+}
+
+function getChecks(data: any) {
+
+  const checks = [];
+  findChecksRecursively(data);
+  
+  function findChecksRecursively(data) {
+    if (data.groups.length === 0) {
+      return;
+    }
+    for (let item in data.groups) {
+      if(Object.keys(data.groups[item]["checks"]).length > 0) {
+        checks.push(data.groups[item]["checks"]);
+      }
+      findChecksRecursively(data.groups[item]);
+    }
+  }
+
+  return checks;
 }
