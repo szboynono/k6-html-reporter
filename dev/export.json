@@ -127,7 +127,14 @@
                         "groups": {},
                         "checks": {
                             "status code is 200": {
-                                "name": "status code is 200",
+                                "name": "status code is 2155555500",
+                                "path": "::s1::case one::status code is 200",
+                                "id": "f98aca90955209e49b1ba69fd40a858b",
+                                "passes": 23,
+                                "fails": 0
+                            },
+                            "status code is 200asdsd": {
+                                "name": "status code is 215100asdsd",
                                 "path": "::s1::case one::status code is 200",
                                 "id": "f98aca90955209e49b1ba69fd40a858b",
                                 "passes": 23,
@@ -142,7 +149,7 @@
                         "groups": {},
                         "checks": {
                             "status code is 200": {
-                                "name": "status code is 200",
+                                "name": "status code is 21500",
                                 "path": "::s1::case two::status code is 200",
                                 "id": "1573d096579295086a681b4e82b9c40c",
                                 "passes": 23,
@@ -165,7 +172,7 @@
                         "groups": {},
                         "checks": {
                             "status code is 200 a": {
-                                "name": "status code is 200 a",
+                                "name": "status code is 2400 a",
                                 "path": "::s2::case one 2::status code is 200 a",
                                 "id": "86119ce1b406322b98bc46a5947a1b74",
                                 "passes": 23,
@@ -180,7 +187,7 @@
                         "groups": {},
                         "checks": {
                             "status code is 200 a": {
-                                "name": "status code is 200 a",
+                                "name": "status code is 2200 a",
                                 "path": "::s2::case two 2::status code is 200 a",
                                 "id": "8d6bb2837ab320f10d7e1c720bab1563",
                                 "passes": 23,
@@ -189,9 +196,25 @@
                         }
                     }
                 },
-                "checks": {}
+                "checks": {
+                    "status code is 300a": {
+                        "name": "status code is 300a",
+                        "path": "::s2::case two 2::status code is 200 a",
+                        "id": "8d6bb2837ab320f10d7e1c720bab1563",
+                        "passes": 23,
+                        "fails": 0
+                    }
+                }
             }
         },
-        "checks": {}
+        "checks": {
+            "status code is 100": {
+                "name": "status code is 100",
+                "path": "::s2::case two 2::status code is 200 a",
+                "id": "8d6bb2837ab320f10d7e1c720bab1563",
+                "passes": 23,
+                "fails": 0
+            }
+        }
     }
 }

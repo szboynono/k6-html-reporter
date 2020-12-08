@@ -22,7 +22,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   const templatePath = path.resolve(__dirname, '../templates/template.ejs');
   const data = content["root_group"];
   
-  getChecks(data);
+  console.log(getChecks(data));
   ejs.renderFile(templatePath, { data: data }, {}, function (err, str) {
     if (err) {
       console.error(err);
@@ -38,20 +38,24 @@ function writeHtmlReport(content: JSON, filePath: string): void {
 
 function getChecks(data: any) {
 
-  const checks = [];
+  const checksOutput = [];
   findChecksRecursively(data);
   
   function findChecksRecursively(data) {
     if (data.groups.length === 0) {
       return;
     }
+    
+    if(Object.keys(data.checks).length > 0) {
+      Object.values(data.checks).forEach((value) => {
+        checksOutput.push(value);
+      })
+    }
+ 
     for (let item in data.groups) {
-      if(Object.keys(data.groups[item]["checks"]).length > 0) {
-        checks.push(data.groups[item]["checks"]);
-      }
       findChecksRecursively(data.groups[item]);
     }
   }
 
-  return checks;
+  return checksOutput;
 }
