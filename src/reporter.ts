@@ -22,16 +22,10 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   const templatePath = path.resolve(__dirname, '../templates/template.ejs');
   const data = content["root_group"];
   
-  const proccessedChecks = getChecks(data).map((data) => {
-    const splitedArr = data.path.split("::");
-    return {
-      ...data,
-      pathArray: splitedArr
-    }
-  });
+  console.log(getChecks(data));
   
 
-  ejs.renderFile(templatePath, { checks: proccessedChecks }, {}, function (err, str) {
+  ejs.renderFile(templatePath, {}, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
