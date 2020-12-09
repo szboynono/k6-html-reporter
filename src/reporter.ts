@@ -22,10 +22,17 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   const templatePath = path.resolve(__dirname, '../templates/template.ejs');
   const data = content["root_group"];
   
-  console.log(getChecks(data));
-  
+  const checks = getChecks(data).map((data) => {
+    const splitedPath = data.path.split('::');
+    splitedPath.shift();
+    
+    return {
+      ...data,
+      pathArray: splitedPath.join(" -> ")
+    }
+  });
 
-  ejs.renderFile(templatePath, {}, {}, function (err, str) {
+  ejs.renderFile(templatePath, {checks}, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
@@ -40,7 +47,6 @@ function writeHtmlReport(content: JSON, filePath: string): void {
 
 
 function getChecks(data: any) {
-
   const checksOutput = [];
   findChecksRecursively(data);
   

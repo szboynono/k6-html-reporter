@@ -131,7 +131,7 @@
                                 "path": "::s1::case one::status code is 200",
                                 "id": "f98aca90955209e49b1ba69fd40a858b",
                                 "passes": 19,
-                                "fails": 0
+                                "fails": 1
                             }
                         }
                     },

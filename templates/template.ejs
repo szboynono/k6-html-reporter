@@ -9,12 +9,43 @@
 
 <body>
   <div class="container">
-    <div class="jumbotron jumbotron-fluid bg-white">
-      <div class="container">
+    <div class="jumbotron jumbotron-fluid bg-white my-5">
+      <div class="container px-0">
         <h1 class="display-4">K6 Summary Report</h1>
         <p class="lead">Powered by k6-html-reporter</p>
       </div>
-     
+      <hr>
+      <% if(checks.length > 0) {%>
+      <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Checks
+      </button>
+      <div class="collapse show" id="collapseExample">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Check</th>
+              <th scope="col">passes</th>
+              <th scope="col">fails</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i=0; i < checks.length; i++) { %>
+              <% if(checks[i].fails > 0) { %>
+                <tr class="bg-danger text-white">
+              <% } else { %>
+                <tr>
+              <% } %>
+                  <th scope="row" class="text-secondary"><%= i+1 %></th>
+                  <td><%= checks[i].pathArray%></th>
+                  <td><%= checks[i].passes %></td>
+                  <td><%= checks[i].fails %></td>
+                </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <% } %>
 
     </div>
   </div>
