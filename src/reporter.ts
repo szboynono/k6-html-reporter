@@ -28,7 +28,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     
     return {
       ...data,
-      pathArray: splitedPath.join(" -> ")
+      pathArray: splitedPath.join(" \u21C0 ")
     }
   });
 
