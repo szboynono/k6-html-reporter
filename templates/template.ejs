@@ -54,6 +54,15 @@
           </table>
           <p class="d-inline-block me-3 text-success">passes: <%= checkMetrics[0].passes %></p>
           <p class="d-inline-block text-danger">fails: <%= checkMetrics[0].fails %></p>
+
+          <% if(checkMetrics[0]["thresholds"]) { %>
+          <div>
+            <p class="d-inline-block">Thresholds:</p>
+            <%for(let item in checkMetrics[0].thresholds) { %>
+              <p class="d-inline-block"><%= item%>: <%= checkMetrics[0]["thresholds"][item]%></p>
+            <%}%>
+          </div>
+          <% } %>
         </div>
       </div>
       <% } %>
@@ -79,9 +88,9 @@
                 <% for(let i=0; i < countMetrics.length; i++) { %>
                 <tr>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
-                  <% for(let key in countMetrics[i]) {%>
-                  <td><%= countMetrics[i][key] %></td>
-                  <% } %>
+                  <td><%= countMetrics[i].name %></td>
+                  <td><%= countMetrics[i].count %></td>
+                  <td><%= countMetrics[i].rate %></td>
                 </tr>
                 <% } %>
               </tbody>
@@ -109,9 +118,13 @@
                 <% for(let i=0; i < timeMetrics.length; i++) { %>
                 <tr>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
-                  <% for(let key in timeMetrics[i]) {%>
-                  <td><%= timeMetrics[i][key] %></td>
-                  <% } %>
+                  <td><%= timeMetrics[i].name %></td>
+                  <td><%= timeMetrics[i].avg %></td>
+                  <td><%= timeMetrics[i].max %></td>
+                  <td><%= timeMetrics[i].med %></td>
+                  <td><%= timeMetrics[i].min %></td>
+                  <td><%= timeMetrics[i]["p(90)"] %></td>
+                  <td><%= timeMetrics[i]["p(95)"] %></td>
                 </tr>
                 <% } %>
               </tbody>
@@ -136,9 +149,10 @@
                   <% for(let i=0; i < vusMetrics.length; i++) { %>
                   <tr>
                     <th scope="row" class="text-secondary"><%= i+1 %></th>
-                    <% for(let key in vusMetrics[i]) {%>
-                    <td><%= vusMetrics[i][key] %></td>
-                    <% } %>
+                    <td><%= vusMetrics[i].name %></td>
+                    <td><%= vusMetrics[i].max %></td>
+                    <td><%= vusMetrics[i].min %></td>
+                    <td><%= vusMetrics[i].value %></td>
                   </tr>
                   <% } %>
                 </tbody>
