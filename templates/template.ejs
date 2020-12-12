@@ -44,12 +44,11 @@
             <% } %>
           </tbody>
         </table>
+        <p class="d-inline-block me-3 text-success">passes: <%= checkMetricsData.passes %></p>
+        <p class="d-inline-block text-danger">fails: <%= checkMetricsData.fails %></p>
       </div>
       <% } %>
 
-      <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Metrics
-      </button>
 
     </div>
   </div>

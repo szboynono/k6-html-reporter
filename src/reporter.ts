@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import ejs from 'ejs';
-import { group } from 'console';
 
 export function generate(options: Options) {
   const resolvedInputPath = path.resolve(process.cwd(), options.jsonFile);
@@ -20,9 +19,10 @@ function readJsonReport(filePath: string): JSON {
 
 function writeHtmlReport(content: JSON, filePath: string): void {
   const templatePath = path.resolve(__dirname, '../templates/template.ejs');
-  const data = content["root_group"];
-  
-  const checks = getChecks(data).map((data) => {
+  const checkRootGroupData = content["root_group"];
+  const checkMetricsData = content["metrics"]["checks"];
+
+  const checks = getChecks(checkRootGroupData).map((data) => {
     const splitedPath = data.path.split('::');
     splitedPath.shift();
     
@@ -32,7 +32,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     }
   });
 
-  ejs.renderFile(templatePath, {checks}, {}, function (err, str) {
+  ejs.renderFile(templatePath, {checks, checkMetricsData}, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
@@ -44,6 +44,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     });
   });
 }
+
 
 
 function getChecks(data: any) {

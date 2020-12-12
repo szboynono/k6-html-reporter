@@ -2,107 +2,107 @@
     "metrics": {
         "checks": {
             "fails": 0,
-            "passes": 114,
+            "passes": 88,
             "thresholds": {
                 "rate>0.90": false
             },
             "value": 0
         },
         "data_received": {
-            "count": 39538327,
-            "rate": 3117829.964132635
+            "count": 36406486,
+            "rate": 3389688.3771263724
         },
         "data_sent": {
-            "count": 91389,
-            "rate": 7206.560929907768
+            "count": 77662,
+            "rate": 7230.8538303968235
         },
         "group_duration": {
-            "avg": 460.58321491228065,
-            "max": 1325.2946,
-            "med": 372.5668,
-            "min": 124.7121,
-            "p(90)": 852.2038100000002,
-            "p(95)": 1058.173445
+            "avg": 457.0698893939395,
+            "max": 1988.0212,
+            "med": 296.00445,
+            "min": 116.068,
+            "p(90)": 957.6327000000001,
+            "p(95)": 1421.8606549999995
         },
         "http_req_blocked": {
-            "avg": 28.588287368421053,
-            "max": 556.4832,
+            "avg": 30.891672727272727,
+            "max": 567.0946,
             "med": 0.0129,
-            "min": 0.0027,
-            "p(90)": 0.016080000000000007,
-            "p(95)": 300.83421999999973
+            "min": 0.0026,
+            "p(90)": 0.02504999999999996,
+            "p(95)": 366.45311999999996
         },
         "http_req_connecting": {
-            "avg": 5.9688684210526315,
-            "max": 195.0597,
+            "avg": 7.965324999999999,
+            "max": 223.3909,
             "med": 0,
             "min": 0,
             "p(90)": 0,
-            "p(95)": 38.81466999999998
+            "p(95)": 39.81406999999997
         },
         "http_req_duration": {
-            "avg": 372.1508157894734,
-            "max": 1257.9025,
-            "med": 305.7296,
-            "min": 124.5406,
-            "p(90)": 657.3048600000001,
-            "p(95)": 764.9995399999999,
+            "avg": 311.6269125000001,
+            "max": 1042.0675,
+            "med": 215.85755,
+            "min": 115.959,
+            "p(90)": 621.0491,
+            "p(95)": 823.4920099999998,
             "thresholds": {
                 "p(90) < 400": true
             }
         },
         "http_req_receiving": {
-            "avg": 233.01199263157886,
-            "max": 841.7578,
-            "med": 195.0476,
-            "min": 69.8682,
-            "p(90)": 457.55604000000017,
-            "p(95)": 528.02621
+            "avg": 192.36066931818183,
+            "max": 779.1409,
+            "med": 105.93635,
+            "min": 56.8699,
+            "p(90)": 442.6456299999999,
+            "p(95)": 596.6999599999999
         },
         "http_req_sending": {
-            "avg": 0.1585284210526316,
-            "max": 0.5283,
-            "med": 0.1592,
-            "min": 0.0395,
-            "p(90)": 0.2466800000000002,
-            "p(95)": 0.3544399999999998
+            "avg": 0.15778863636363644,
+            "max": 0.5656,
+            "med": 0.1563,
+            "min": 0.0382,
+            "p(90)": 0.18226,
+            "p(95)": 0.2443399999999994
         },
         "http_req_tls_handshaking": {
-            "avg": 22.500404210526316,
-            "max": 406.6849,
+            "avg": 22.48738068181818,
+            "max": 413.8504,
             "med": 0,
             "min": 0,
             "p(90)": 0,
-            "p(95)": 247.07321999999982
+            "p(95)": 256.9881149999984
         },
         "http_req_waiting": {
-            "avg": 138.98029473684204,
-            "max": 891.1135,
-            "med": 114.3857,
-            "min": 37.2228,
-            "p(90)": 222.31216000000003,
-            "p(95)": 281.75366999999994
+            "avg": 119.10845454545456,
+            "max": 474.9633,
+            "med": 97.93295,
+            "min": 47.9386,
+            "p(90)": 199.63986999999995,
+            "p(95)": 253.5713599999999
         },
         "http_reqs": {
-            "count": 95,
-            "rate": 7.4913095486463135
+            "count": 88,
+            "rate": 8.193391067380707
         },
         "iteration_duration": {
-            "avg": 2005.3783263157893,
-            "max": 3493.771,
-            "med": 1903.2527,
-            "min": 788.4115,
-            "p(90)": 3108.6161199999997,
-            "p(95)": 3433.09336
+            "avg": 685.6985340909091,
+            "max": 1988.1512,
+            "med": 448.1809,
+            "min": 256.1739,
+            "p(90)": 1549.4468100000001,
+            "p(95)": 1878.9104600000003
         },
         "iterations": {
-            "count": 19,
-            "rate": 1.4982619097292627
+            "count": 44,
+            "rate": 4.096695533690354
         },
         "vus": {
             "max": 7,
             "min": 1,
-            "value": 3
+            "value": 7
         },
         "vus_max": {
             "max": 8,
@@ -115,83 +115,37 @@
         "path": "",
         "id": "d41d8cd98f00b204e9800998ecf8427e",
         "groups": {
-            "s1": {
-                "name": "s1",
-                "path": "::s1",
-                "id": "420a634bccaec30f259c0ce0790771f1",
+            "scenarios": {
+                "name": "scenarios",
+                "path": "::scenarios",
+                "id": "798015c45e9ecbc46964c87d602d1011",
                 "groups": {
                     "case one": {
                         "name": "case one",
-                        "path": "::s1::case one",
-                        "id": "ed37a0a0321161a7fd2b3ff1bb186dfa",
+                        "path": "::scenarios::case one",
+                        "id": "4cda31e6c70961ba19538c9563bc1bcf",
                         "groups": {},
                         "checks": {
                             "status code is 200": {
                                 "name": "status code is 200",
-                                "path": "::s1::case one::status code is 200",
-                                "id": "f98aca90955209e49b1ba69fd40a858b",
-                                "passes": 19,
-                                "fails": 1
+                                "path": "::scenarios::case one::status code is 200",
+                                "id": "3fe75f096b735deb8ff6f45e3893ff6a",
+                                "passes": 44,
+                                "fails": 0
                             }
                         }
                     },
                     "case two": {
                         "name": "case two",
-                        "path": "::s1::case two",
-                        "id": "bca879cfbc0508616d03e0e238a62ab7",
+                        "path": "::scenarios::case two",
+                        "id": "775b37641d71326d1096689cbabe706d",
                         "groups": {},
                         "checks": {
                             "status code is 200": {
                                 "name": "status code is 200",
-                                "path": "::s1::case two::status code is 200",
-                                "id": "1573d096579295086a681b4e82b9c40c",
-                                "passes": 19,
-                                "fails": 0
-                            }
-                        }
-                    }
-                },
-                "checks": {
-                    "status code is 200 first sub-root": {
-                        "name": "status code is 200 first sub-root",
-                        "path": "::s1::status code is 200 first sub-root",
-                        "id": "2c506e36177153727a810b34277e53fa",
-                        "passes": 19,
-                        "fails": 0
-                    }
-                }
-            },
-            "s2": {
-                "name": "s2",
-                "path": "::s2",
-                "id": "f0dc2690c51bea5ee99bb0cef08472bc",
-                "groups": {
-                    "case one 2": {
-                        "name": "case one 2",
-                        "path": "::s2::case one 2",
-                        "id": "6625805c7e4a7f210270a727197f82de",
-                        "groups": {},
-                        "checks": {
-                            "status code is 200 a": {
-                                "name": "status code is 200 a",
-                                "path": "::s2::case one 2::status code is 200 a",
-                                "id": "86119ce1b406322b98bc46a5947a1b74",
-                                "passes": 19,
-                                "fails": 0
-                            }
-                        }
-                    },
-                    "case two 2": {
-                        "name": "case two 2",
-                        "path": "::s2::case two 2",
-                        "id": "8f782321670ee84bab63be18b982f799",
-                        "groups": {},
-                        "checks": {
-                            "status code is 200 a": {
-                                "name": "status code is 200 a",
-                                "path": "::s2::case two 2::status code is 200 a",
-                                "id": "8d6bb2837ab320f10d7e1c720bab1563",
-                                "passes": 19,
+                                "path": "::scenarios::case two::status code is 200",
+                                "id": "417f3ee603e7f3cb76b93f0b599948e7",
+                                "passes": 44,
                                 "fails": 0
                             }
                         }
@@ -200,14 +154,6 @@
                 "checks": {}
             }
         },
-        "checks": {
-            "status code is 200 root": {
-                "name": "status code is 200 root",
-                "path": "::status code is 200 root",
-                "id": "5d0d6927b82073adebd1200b5dcb0327",
-                "passes": 19,
-                "fails": 0
-            }
-        }
+        "checks": {}
     }
 }
