@@ -5,6 +5,12 @@
   <title>K6 Summary Report</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <style>
+    ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent; /* make scrollbar transparent */
+    }
+  </style>
 </head>
 
 <body>
@@ -16,343 +22,397 @@
       </div>
       <hr>
       
-      <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-        aria-expanded="false" aria-controls="collapseExample">
-        Checks
-      </button>
-      <div class="collapse show" id="collapseExample">
-        <table class="table table-hover table-sm">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">check</th>
-              <th scope="col">passes</th>
-              <th scope="col">fails</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            
-            <tr>
+      <div class="my-2">
+        <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+          aria-expanded="false" aria-controls="collapseExample">
+          Checks
+        </button>
+        <div class="collapse show" id="collapseExample">
+          <table class="table table-hover table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">check</th>
+                <th scope="col">passes</th>
+                <th scope="col">fails</th>
+              </tr>
+            </thead>
+            <tbody>
               
-              <th scope="row" class="text-secondary">1</th>
-              <td>status code is 200 root</td>
-              <td>21</td>
-              <td>0</td>
-            </tr>
-            
-            
-            <tr>
               
-              <th scope="row" class="text-secondary">2</th>
-              <td>s1 ⇀ status code is 200 first sub-root</td>
-              <td>21</td>
-              <td>0</td>
-            </tr>
-            
-            
-            <tr>
+              <tr>
+                
+                <th scope="row" class="text-secondary">1</th>
+                <td>status code is 200 root</td>
+                <td>21</td>
+                <td>0</td>
+              </tr>
               
-              <th scope="row" class="text-secondary">3</th>
-              <td>s1 ⇀ case one ⇀ status code is 200</td>
-              <td>21</td>
-              <td>0</td>
-            </tr>
-            
-            
-            <tr>
               
-              <th scope="row" class="text-secondary">4</th>
-              <td>s1 ⇀ case two ⇀ status code is 200</td>
-              <td>21</td>
-              <td>0</td>
-            </tr>
-            
-            
-            <tr>
+              <tr>
+                
+                <th scope="row" class="text-secondary">2</th>
+                <td>s1 ⇀ status code is 200 first sub-root</td>
+                <td>21</td>
+                <td>0</td>
+              </tr>
               
-              <th scope="row" class="text-secondary">5</th>
-              <td>s2 ⇀ case one 2 ⇀ status code is 200 a</td>
-              <td>21</td>
-              <td>0</td>
-            </tr>
-            
-            
-            <tr>
               
-              <th scope="row" class="text-secondary">6</th>
-              <td>s2 ⇀ case two 2 ⇀ status code is 200 a</td>
-              <td>21</td>
-              <td>0</td>
-            </tr>
-            
-          </tbody>
-        </table>
-        <p class="d-inline-block me-3 text-success">passes: 126</p>
-        <p class="d-inline-block text-danger">fails: 0</p>
+              <tr>
+                
+                <th scope="row" class="text-secondary">3</th>
+                <td>s1 ⇀ case one ⇀ status code is 200</td>
+                <td>21</td>
+                <td>0</td>
+              </tr>
+              
+              
+              <tr>
+                
+                <th scope="row" class="text-secondary">4</th>
+                <td>s1 ⇀ case two ⇀ status code is 200</td>
+                <td>21</td>
+                <td>0</td>
+              </tr>
+              
+              
+              <tr>
+                
+                <th scope="row" class="text-secondary">5</th>
+                <td>s2 ⇀ case one 2 ⇀ status code is 200 a</td>
+                <td>21</td>
+                <td>0</td>
+              </tr>
+              
+              
+              <tr>
+                
+                <th scope="row" class="text-secondary">6</th>
+                <td>s2 ⇀ case two 2 ⇀ status code is 200 a</td>
+                <td>21</td>
+                <td>0</td>
+              </tr>
+              
+            </tbody>
+          </table>
+          <p class="d-inline-block me-3 text-success">passes: 126</p>
+          <p class="d-inline-block text-danger">fails: 0</p>
+        </div>
       </div>
       
+      <div class="my-2">
+        <button class="btn btn-lg fs-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
+          aria-expanded="false" aria-controls="collapseMetric">
+          Metrics
+        </button>
+        <div class="collapse show" id="collapseMetric">
+          
+          <div class="my-3">
+            <p>Measured based on rate</p>
+            <table class="table table-hover table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">name</th>
+                  <th scope="col">count</th>
+                  <th scope="col">rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">1</th>
+                  
+                  <td>data_received</td>
+                  
+                  <td>43698360</td>
+                  
+                  <td>3619698.062612706</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">2</th>
+                  
+                  <td>data_sent</td>
+                  
+                  <td>102144</td>
+                  
+                  <td>8460.968304245565</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">3</th>
+                  
+                  <td>http_reqs</td>
+                  
+                  <td>105</td>
+                  
+                  <td>8.697541431173484</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">4</th>
+                  
+                  <td>iterations</td>
+                  
+                  <td>21</td>
+                  
+                  <td>1.7395082862346969</td>
+                  
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+          
 
-      <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
-        aria-expanded="false" aria-controls="collapseMetric">
-        Metrics
-      </button>
-      <div class="collapse show" id="collapseMetric">
-        
-        <p>Measured based on rate</p>
-        <table class="table table-hover table-sm">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">name</th>
-              <th scope="col">count</th>
-              <th scope="col">rate</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <th scope="row" class="text-secondary">1</th>
-              
-              <td>data_received</td>
-              
-              <td>43698360</td>
-              
-              <td>3619698.062612706</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">2</th>
-              
-              <td>data_sent</td>
-              
-              <td>102144</td>
-              
-              <td>8460.968304245565</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">3</th>
-              
-              <td>http_reqs</td>
-              
-              <td>105</td>
-              
-              <td>8.697541431173484</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">4</th>
-              
-              <td>iterations</td>
-              
-              <td>21</td>
-              
-              <td>1.7395082862346969</td>
-              
-            </tr>
-            
-          </tbody>
-        </table>
-        
+          
+          <div class="mt-5">
+            <p>Measured based on time</p>
+            <table class="table table-hover table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">name</th>
+                  <th scope="col">avg</th>
+                  <th scope="col">max</th>
+                  <th scope="col">med</th>
+                  <th scope="col">min</th>
+                  <th scope="col">P(90)</th>
+                  <th scope="col">P(95)</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">1</th>
+                  
+                  <td>group_duration</td>
+                  
+                  <td>431.3572238095239</td>
+                  
+                  <td>1262.9421</td>
+                  
+                  <td>366.29145000000005</td>
+                  
+                  <td>125.3637</td>
+                  
+                  <td>802.4441999999999</td>
+                  
+                  <td>918.08895</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">2</th>
+                  
+                  <td>http_req_blocked</td>
+                  
+                  <td>27.038768571428573</td>
+                  
+                  <td>618.2003</td>
+                  
+                  <td>0.0129</td>
+                  
+                  <td>0.0027</td>
+                  
+                  <td>0.0138</td>
+                  
+                  <td>293.73761999999994</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">3</th>
+                  
+                  <td>http_req_connecting</td>
+                  
+                  <td>5.585939047619047</td>
+                  
+                  <td>167.9361</td>
+                  
+                  <td>0</td>
+                  
+                  <td>0</td>
+                  
+                  <td>0</td>
+                  
+                  <td>36.65139999999998</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">4</th>
+                  
+                  <td>http_req_duration</td>
+                  
+                  <td>333.7922933333333</td>
+                  
+                  <td>949.5001</td>
+                  
+                  <td>312.5522</td>
+                  
+                  <td>125.1489</td>
+                  
+                  <td>595.15002</td>
+                  
+                  <td>640.7750799999999</td>
+                  
+                  <td>[object Object]</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">5</th>
+                  
+                  <td>http_req_receiving</td>
+                  
+                  <td>219.37372285714278</td>
+                  
+                  <td>746.1806</td>
+                  
+                  <td>181.5291</td>
+                  
+                  <td>67.5525</td>
+                  
+                  <td>413.58130000000006</td>
+                  
+                  <td>539.8058199999999</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">6</th>
+                  
+                  <td>http_req_sending</td>
+                  
+                  <td>0.1754428571428571</td>
+                  
+                  <td>3.0692</td>
+                  
+                  <td>0.143</td>
+                  
+                  <td>0.039</td>
+                  
+                  <td>0.17692</td>
+                  
+                  <td>0.19226</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">7</th>
+                  
+                  <td>http_req_tls_handshaking</td>
+                  
+                  <td>21.00668761904762</td>
+                  
+                  <td>535.9856</td>
+                  
+                  <td>0</td>
+                  
+                  <td>0</td>
+                  
+                  <td>0</td>
+                  
+                  <td>235.28519999999992</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">8</th>
+                  
+                  <td>http_req_waiting</td>
+                  
+                  <td>114.24312761904763</td>
+                  
+                  <td>344.9805</td>
+                  
+                  <td>107.7716</td>
+                  
+                  <td>48.6443</td>
+                  
+                  <td>176.90294</td>
+                  
+                  <td>202.90653999999998</td>
+                  
+                </tr>
+                
+                <tr>
+                  <th scope="row" class="text-secondary">9</th>
+                  
+                  <td>iteration_duration</td>
+                  
+                  <td>1805.765361904762</td>
+                  
+                  <td>3715.2217</td>
+                  
+                  <td>1832.1867</td>
+                  
+                  <td>761.3</td>
+                  
+                  <td>2642.1016</td>
+                  
+                  <td>3588.9285</td>
+                  
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+          
 
-        
-        <p>Measured based on time</p>
-        <table class="table table-hover table-sm">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">name</th>
-              <th scope="col">avg</th>
-              <th scope="col">max</th>
-              <th scope="col">med</th>
-              <th scope="col">min</th>
-              <th scope="col">P(90)</th>
-              <th scope="col">P(95)</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <th scope="row" class="text-secondary">1</th>
-              
-                <td>group_duration</td>
-              
-                <td>431.3572238095239</td>
-              
-                <td>1262.9421</td>
-              
-                <td>366.29145000000005</td>
-              
-                <td>125.3637</td>
-              
-                <td>802.4441999999999</td>
-              
-                <td>918.08895</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">2</th>
-              
-                <td>http_req_blocked</td>
-              
-                <td>27.038768571428573</td>
-              
-                <td>618.2003</td>
-              
-                <td>0.0129</td>
-              
-                <td>0.0027</td>
-              
-                <td>0.0138</td>
-              
-                <td>293.73761999999994</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">3</th>
-              
-                <td>http_req_connecting</td>
-              
-                <td>5.585939047619047</td>
-              
-                <td>167.9361</td>
-              
-                <td>0</td>
-              
-                <td>0</td>
-              
-                <td>0</td>
-              
-                <td>36.65139999999998</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">4</th>
-              
-                <td>http_req_duration</td>
-              
-                <td>333.7922933333333</td>
-              
-                <td>949.5001</td>
-              
-                <td>312.5522</td>
-              
-                <td>125.1489</td>
-              
-                <td>595.15002</td>
-              
-                <td>640.7750799999999</td>
-              
-                <td>[object Object]</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">5</th>
-              
-                <td>http_req_receiving</td>
-              
-                <td>219.37372285714278</td>
-              
-                <td>746.1806</td>
-              
-                <td>181.5291</td>
-              
-                <td>67.5525</td>
-              
-                <td>413.58130000000006</td>
-              
-                <td>539.8058199999999</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">6</th>
-              
-                <td>http_req_sending</td>
-              
-                <td>0.1754428571428571</td>
-              
-                <td>3.0692</td>
-              
-                <td>0.143</td>
-              
-                <td>0.039</td>
-              
-                <td>0.17692</td>
-              
-                <td>0.19226</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">7</th>
-              
-                <td>http_req_tls_handshaking</td>
-              
-                <td>21.00668761904762</td>
-              
-                <td>535.9856</td>
-              
-                <td>0</td>
-              
-                <td>0</td>
-              
-                <td>0</td>
-              
-                <td>235.28519999999992</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">8</th>
-              
-                <td>http_req_waiting</td>
-              
-                <td>114.24312761904763</td>
-              
-                <td>344.9805</td>
-              
-                <td>107.7716</td>
-              
-                <td>48.6443</td>
-              
-                <td>176.90294</td>
-              
-                <td>202.90653999999998</td>
-              
-            </tr>
-            
-            <tr>
-              <th scope="row" class="text-secondary">9</th>
-              
-                <td>iteration_duration</td>
-              
-                <td>1805.765361904762</td>
-              
-                <td>3715.2217</td>
-              
-                <td>1832.1867</td>
-              
-                <td>761.3</td>
-              
-                <td>2642.1016</td>
-              
-                <td>3588.9285</td>
-              
-            </tr>
-            
-          </tbody>
-        </table>
+          
+            <div class="mt-5">
+              <p>Measured based on vus</p>
+              <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">max</th>
+                    <th scope="col">min</th>
+                    <th scope="col">value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <tr>
+                    <th scope="row" class="text-secondary">1</th>
+                    
+                    <td>vus</td>
+                    
+                    <td>7</td>
+                    
+                    <td>1</td>
+                    
+                    <td>3</td>
+                    
+                  </tr>
+                  
+                  <tr>
+                    <th scope="row" class="text-secondary">2</th>
+                    
+                    <td>vus_max</td>
+                    
+                    <td>8</td>
+                    
+                    <td>8</td>
+                    
+                    <td>8</td>
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          
+
+        </div>
       </div>
-      
 
 
 
