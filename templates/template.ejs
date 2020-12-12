@@ -16,7 +16,8 @@
       </div>
       <hr>
       <% if(checks.length > 0) {%>
-      <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample">
         Checks
       </button>
       <div class="collapse show" id="collapseExample">
@@ -24,35 +25,98 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Check</th>
+              <th scope="col">check</th>
               <th scope="col">passes</th>
               <th scope="col">fails</th>
             </tr>
           </thead>
           <tbody>
             <% for(var i=0; i < checks.length; i++) { %>
-              <% if(checks[i].fails > 0) { %>
-                <tr class="bg-danger text-white">
+            <% if(checks[i].fails > 0) { %>
+            <tr class="bg-danger text-white">
               <% } else { %>
-                <tr>
+            <tr>
               <% } %>
-                  <th scope="row" class="text-secondary"><%= i+1 %></th>
-                  <td><%= checks[i].pathArray%></th>
-                  <td><%= checks[i].passes %></td>
-                  <td><%= checks[i].fails %></td>
-                </tr>
+              <th scope="row" class="text-secondary"><%= i+1 %></th>
+              <td><%= checks[i].pathArray%></td>
+              <td><%= checks[i].passes %></td>
+              <td><%= checks[i].fails %></td>
+            </tr>
             <% } %>
           </tbody>
         </table>
-        <p class="d-inline-block me-3 text-success">passes: <%= checkMetricsData.passes %></p>
-        <p class="d-inline-block text-danger">fails: <%= checkMetricsData.fails %></p>
+        <p class="d-inline-block me-3 text-success">passes: <%= checkMetrics[0].passes %></p>
+        <p class="d-inline-block text-danger">fails: <%= checkMetrics[0].fails %></p>
+      </div>
+      <% } %>
+
+      <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
+        aria-expanded="false" aria-controls="collapseMetric">
+        Metrics
+      </button>
+      <div class="collapse show" id="collapseMetric">
+        <% if(countMetrics.length > 0) {%>
+        <p>Measured based on rate</p>
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">name</th>
+              <th scope="col">count</th>
+              <th scope="col">rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i=0; i < countMetrics.length; i++) { %>
+            <tr>
+              <th scope="row" class="text-secondary"><%= i+1 %></th>
+              <% for(let key in countMetrics[i]) {%>
+              <td><%= countMetrics[i][key] %></td>
+              <% } %>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+        <% } %>
+
+        <% if(timeMetrics.length > 0) {%>
+        <p>Measured based on time</p>
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">name</th>
+              <th scope="col">avg</th>
+              <th scope="col">max</th>
+              <th scope="col">med</th>
+              <th scope="col">min</th>
+              <th scope="col">P(90)</th>
+              <th scope="col">P(95)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i=0; i < timeMetrics.length; i++) { %>
+            <tr>
+              <th scope="row" class="text-secondary"><%= i+1 %></th>
+              <% for(let key in timeMetrics[i]) {%>
+                <td><%= timeMetrics[i][key] %></td>
+              <% } %>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
       </div>
       <% } %>
 
 
+
+
+
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

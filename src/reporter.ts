@@ -20,19 +20,21 @@ function readJsonReport(filePath: string): JSON {
 function writeHtmlReport(content: JSON, filePath: string): void {
   const templatePath = path.resolve(__dirname, '../templates/template.ejs');
   const checkRootGroupData = content["root_group"];
-  const checkMetricsData = content["metrics"]["checks"];
+  const metricsData = content["metrics"];
+
+  const { checkMetrics, countMetrics, timeMetrics, vusMetrics } = mapMetrics(metricsData);
 
   const checks = getChecks(checkRootGroupData).map((data) => {
     const splitedPath = data.path.split('::');
     splitedPath.shift();
-    
+
     return {
       ...data,
       pathArray: splitedPath.join(" \u21C0 ")
     }
   });
 
-  ejs.renderFile(templatePath, {checks, checkMetricsData}, {}, function (err, str) {
+  ejs.renderFile(templatePath, { checks, checkMetrics, countMetrics, timeMetrics, vusMetrics }, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
@@ -45,23 +47,55 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   });
 }
 
+function mapMetrics(data: any) {
+  const checkMetrics = [];
+  const countMetrics = [];
+  const timeMetrics = [];
+  const vusMetrics = [];
 
+  for (let item in data) {
+    const keys = Object.keys(data[item]);
+    if (keys.includes('count')) {
+      countMetrics.push({
+        name: item,
+        ...data[item]
+      })
+    } else if (keys.includes('avg')) {
+      timeMetrics.push({
+        name: item,
+        ...data[item]
+      })
+    } else if (keys.includes('passes')) {
+      checkMetrics.push({
+        name: item,
+        ...data[item]
+      })
+    } else {
+      vusMetrics.push({
+        name: item,
+        ...data[item]
+      })
+    }
+  }
+
+  return { checkMetrics, countMetrics, timeMetrics, vusMetrics }
+}
 
 function getChecks(data: any) {
   const checksOutput = [];
   findChecksRecursively(data);
-  
+
   function findChecksRecursively(data) {
     if (data.groups.length === 0) {
       return;
     }
-    
-    if(Object.keys(data.checks).length > 0) {
+
+    if (Object.keys(data.checks).length > 0) {
       Object.values(data.checks).forEach((value) => {
         checksOutput.push(value);
       })
     }
- 
+
     for (let item in data.groups) {
       findChecksRecursively(data.groups[item]);
     }
