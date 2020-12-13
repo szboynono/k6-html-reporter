@@ -52,14 +52,14 @@
               <% } %>
             </tbody>
           </table>
-          <p class="d-inline-block me-3 text-success">passes: <%= checkMetrics[0].passes %></p>
-          <p class="d-inline-block text-danger">fails: <%= checkMetrics[0].fails %></p>
+          <p class="d-inline-block me-3 text-success">passes: <%= checkMetric.passes %></p>
+          <p class="d-inline-block text-danger">fails: <%= checkMetric.fails %></p>
 
-          <% if(checkMetrics[0]["thresholds"]) { %>
+          <% if(checkMetric["thresholds"]) { %>
           <div>
             <p class="d-inline-block">Thresholds:</p>
-            <%for(let item in checkMetrics[0].thresholds) { %>
-              <p class="d-inline-block"><%= item%>: <%= checkMetrics[0]["thresholds"][item]%></p>
+            <%for(let item in checkMetric.thresholds) { %>
+              <p class="d-inline-block"><%= item%>: <%= checkMetric["thresholds"][item]%></p>
             <%}%>
           </div>
           <% } %>

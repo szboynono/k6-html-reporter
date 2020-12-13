@@ -22,7 +22,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   const checkRootGroupData = content["root_group"];
   const metricsData = content["metrics"];
 
-  const { checkMetrics, countMetrics, timeMetrics, vusMetrics } = mapMetrics(metricsData);
+  const { checkMetric, countMetrics, timeMetrics, vusMetrics } = mapMetrics(metricsData);
 
   const checks = getChecks(checkRootGroupData).map((data) => {
     const splitedPath = data.path.split('::');
@@ -34,7 +34,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     }
   });
 
-  ejs.renderFile(templatePath, { checks, checkMetrics, countMetrics, timeMetrics, vusMetrics }, {}, function (err, str) {
+  ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics }, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
@@ -47,38 +47,42 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   });
 }
 
-function mapMetrics(data: any) {
-  const checkMetrics = [];
+function mapMetrics(data: Object) {
+  let checkMetric = {};
   const countMetrics = [];
   const timeMetrics = [];
   const vusMetrics = [];
 
-  for (let item in data) {
-    const keys = Object.keys(data[item]);
-    if (keys.includes('count')) {
-      countMetrics.push({
-        name: item,
-        ...data[item]
-      })
-    } else if (keys.includes('avg')) {
-      timeMetrics.push({
-        name: item,
-        ...data[item]
-      })
-    } else if (keys.includes('passes')) {
-      checkMetrics.push({
-        name: item,
-        ...data[item]
-      })
-    } else {
-      vusMetrics.push({
-        name: item,
-        ...data[item]
-      })
+  Object.entries(data).forEach(
+    ([key, value]) => {
+      if (Object.keys(value).includes('count')) {
+        countMetrics.push({
+          name: key,
+          ...value
+        })
+      } else if (Object.keys(value).includes('avg')) {
+        timeMetrics.push({
+          name: key,
+          ...value
+        })
+      } else if (Object.keys(value).includes('passes')) {
+        checkMetric = {
+          name: key,
+          ...value
+        }
+      } else if (key.includes('vus')){
+        vusMetrics.push({
+          name: key,
+          ...value
+        })
+      }
     }
-  }
+  );
+  return { checkMetric, countMetrics, timeMetrics, vusMetrics }
+}
 
-  return { checkMetrics, countMetrics, timeMetrics, vusMetrics }
+function thresholdResult(thresholds: any) {
+  console.log(thresholds.length);
 }
 
 function getChecks(data: any) {
