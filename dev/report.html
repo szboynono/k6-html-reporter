@@ -23,12 +23,12 @@
       <hr>
       
       <div class="my-2">
-        <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+        <button class="btn btn-lg fs-2 my-2 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseExample"
           aria-expanded="false" aria-controls="collapseExample">
           Checks
         </button>
         <div class="collapse show" id="collapseExample">
-          <table class="table table-hover table-sm">
+          <table class="table table-hover table-sm table-borderless">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -43,7 +43,7 @@
               <tr>
                 
                 <th scope="row" class="text-secondary">1</th>
-                <td>status code is 200 root</td>
+                <td class="text-primary">status code is 200 root</td>
                 <td>21</td>
                 <td>0</td>
               </tr>
@@ -52,7 +52,7 @@
               <tr>
                 
                 <th scope="row" class="text-secondary">2</th>
-                <td>s1 ⇀ status code is 200 first sub-root</td>
+                <td class="text-primary">s1 ⇀ status code is 200 first sub-root</td>
                 <td>21</td>
                 <td>0</td>
               </tr>
@@ -61,7 +61,7 @@
               <tr>
                 
                 <th scope="row" class="text-secondary">3</th>
-                <td>s1 ⇀ case one ⇀ status code is 200</td>
+                <td class="text-primary">s1 ⇀ case one ⇀ status code is 200</td>
                 <td>21</td>
                 <td>0</td>
               </tr>
@@ -70,7 +70,7 @@
               <tr>
                 
                 <th scope="row" class="text-secondary">4</th>
-                <td>s1 ⇀ case two ⇀ status code is 200</td>
+                <td class="text-primary">s1 ⇀ case two ⇀ status code is 200</td>
                 <td>21</td>
                 <td>0</td>
               </tr>
@@ -79,7 +79,7 @@
               <tr>
                 
                 <th scope="row" class="text-secondary">5</th>
-                <td>s2 ⇀ case one 2 ⇀ status code is 200 a</td>
+                <td class="text-primary">s2 ⇀ case one 2 ⇀ status code is 200 a</td>
                 <td>21</td>
                 <td>0</td>
               </tr>
@@ -88,7 +88,7 @@
               <tr>
                 
                 <th scope="row" class="text-secondary">6</th>
-                <td>s2 ⇀ case two 2 ⇀ status code is 200 a</td>
+                <td class="text-primary">s2 ⇀ case two 2 ⇀ status code is 200 a</td>
                 <td>21</td>
                 <td>0</td>
               </tr>
@@ -110,15 +110,15 @@
       </div>
       
       <div class="my-2">
-        <button class="btn btn-lg fs-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
+        <button class="btn btn-lg fs-2 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
           aria-expanded="false" aria-controls="collapseMetric">
           Metrics
         </button>
         <div class="collapse show" id="collapseMetric">
           
           <div class="my-3">
-            <p>Measured based on rate</p>
-            <table class="table table-hover table-sm">
+            <h6>Measured based on rate</h6>
+            <table class="table table-hover table-sm table-borderless">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -131,28 +131,28 @@
                 
                 <tr>
                   <th scope="row" class="text-secondary">1</th>
-                  <td>data_received</td>
+                  <td class="text-primary">data_received</td>
                   <td>43698360</td>
                   <td>3619698.062612706</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">2</th>
-                  <td>data_sent</td>
+                  <td class="text-primary">data_sent</td>
                   <td>102144</td>
                   <td>8460.968304245565</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">3</th>
-                  <td>http_reqs</td>
+                  <td class="text-primary">http_reqs</td>
                   <td>105</td>
                   <td>8.697541431173484</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">4</th>
-                  <td>iterations</td>
+                  <td class="text-primary">iterations</td>
                   <td>21</td>
                   <td>1.7395082862346969</td>
                 </tr>
@@ -163,9 +163,9 @@
           
 
           
-          <div class="mt-5">
-            <p>Measured based on time</p>
-            <table class="table table-hover table-sm">
+          <div class="mt-4">
+            <h6>Measured based on time</h6>
+            <table class="table table-hover table-sm table-borderless">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -182,101 +182,101 @@
                 
                 <tr>
                   <th scope="row" class="text-secondary">1</th>
-                  <td>group_duration</td>
-                  <td>431.3572238095239</td>
-                  <td>1262.9421</td>
-                  <td>366.29145000000005</td>
-                  <td>125.3637</td>
-                  <td>802.4441999999999</td>
-                  <td>918.08895</td>
+                  <td class="text-primary">group_duration</td>
+                  <td>431.36 ms</td>
+                  <td>1262.94 ms</td>
+                  <td>366.29 ms</td>
+                  <td>125.36 ms</td>
+                  <td>802.44 ms</td>
+                  <td>918.09 ms</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">2</th>
-                  <td>http_req_blocked</td>
-                  <td>27.038768571428573</td>
-                  <td>618.2003</td>
-                  <td>0.0129</td>
-                  <td>0.0027</td>
-                  <td>0.0138</td>
-                  <td>293.73761999999994</td>
+                  <td class="text-primary">http_req_blocked</td>
+                  <td>27.04 ms</td>
+                  <td>618.20 ms</td>
+                  <td>0.01 ms</td>
+                  <td>0.00 ms</td>
+                  <td>0.01 ms</td>
+                  <td>293.74 ms</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">3</th>
-                  <td>http_req_connecting</td>
-                  <td>5.585939047619047</td>
-                  <td>167.9361</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>36.65139999999998</td>
+                  <td class="text-primary">http_req_connecting</td>
+                  <td>5.59 ms</td>
+                  <td>167.94 ms</td>
+                  <td>0.00 ms</td>
+                  <td>0.00 ms</td>
+                  <td>0.00 ms</td>
+                  <td>36.65 ms</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">4</th>
-                  <td>http_req_duration</td>
-                  <td>333.7922933333333</td>
-                  <td>949.5001</td>
-                  <td>312.5522</td>
-                  <td>125.1489</td>
-                  <td>595.15002</td>
-                  <td>640.7750799999999</td>
+                  <td class="text-primary">http_req_duration</td>
+                  <td>333.79 ms</td>
+                  <td>949.50 ms</td>
+                  <td>312.55 ms</td>
+                  <td>125.15 ms</td>
+                  <td>595.15 ms</td>
+                  <td>640.78 ms</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">5</th>
-                  <td>http_req_receiving</td>
-                  <td>219.37372285714278</td>
-                  <td>746.1806</td>
-                  <td>181.5291</td>
-                  <td>67.5525</td>
-                  <td>413.58130000000006</td>
-                  <td>539.8058199999999</td>
+                  <td class="text-primary">http_req_receiving</td>
+                  <td>219.37 ms</td>
+                  <td>746.18 ms</td>
+                  <td>181.53 ms</td>
+                  <td>67.55 ms</td>
+                  <td>413.58 ms</td>
+                  <td>539.81 ms</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">6</th>
-                  <td>http_req_sending</td>
-                  <td>0.1754428571428571</td>
-                  <td>3.0692</td>
-                  <td>0.143</td>
-                  <td>0.039</td>
-                  <td>0.17692</td>
-                  <td>0.19226</td>
+                  <td class="text-primary">http_req_sending</td>
+                  <td>0.18 ms</td>
+                  <td>3.07 ms</td>
+                  <td>0.14 ms</td>
+                  <td>0.04 ms</td>
+                  <td>0.18 ms</td>
+                  <td>0.19 ms</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">7</th>
-                  <td>http_req_tls_handshaking</td>
-                  <td>21.00668761904762</td>
-                  <td>535.9856</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>235.28519999999992</td>
+                  <td class="text-primary">http_req_tls_handshaking</td>
+                  <td>21.01 ms</td>
+                  <td>535.99 ms</td>
+                  <td>0.00 ms</td>
+                  <td>0.00 ms</td>
+                  <td>0.00 ms</td>
+                  <td>235.29 ms</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">8</th>
-                  <td>http_req_waiting</td>
-                  <td>114.24312761904763</td>
-                  <td>344.9805</td>
-                  <td>107.7716</td>
-                  <td>48.6443</td>
-                  <td>176.90294</td>
-                  <td>202.90653999999998</td>
+                  <td class="text-primary">http_req_waiting</td>
+                  <td>114.24 ms</td>
+                  <td>344.98 ms</td>
+                  <td>107.77 ms</td>
+                  <td>48.64 ms</td>
+                  <td>176.90 ms</td>
+                  <td>202.91 ms</td>
                 </tr>
                 
                 <tr>
                   <th scope="row" class="text-secondary">9</th>
-                  <td>iteration_duration</td>
-                  <td>1805.765361904762</td>
-                  <td>3715.2217</td>
-                  <td>1832.1867</td>
-                  <td>761.3</td>
-                  <td>2642.1016</td>
-                  <td>3588.9285</td>
+                  <td class="text-primary">iteration_duration</td>
+                  <td>1805.77 ms</td>
+                  <td>3715.22 ms</td>
+                  <td>1832.19 ms</td>
+                  <td>761.30 ms</td>
+                  <td>2642.10 ms</td>
+                  <td>3588.93 ms</td>
                 </tr>
                 
               </tbody>
@@ -285,9 +285,9 @@
           
 
           
-            <div class="mt-5">
-              <p>Measured based on vus</p>
-              <table class="table table-hover table-sm">
+            <div class="mt-4">
+              <h6>Measured based on vus</h6>
+              <table class="table table-hover table-sm table-borderless">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -301,7 +301,7 @@
                   
                   <tr>
                     <th scope="row" class="text-secondary">1</th>
-                    <td>vus</td>
+                    <td class="text-primary">vus</td>
                     <td>7</td>
                     <td>1</td>
                     <td>3</td>
@@ -309,7 +309,7 @@
                   
                   <tr>
                     <th scope="row" class="text-secondary">2</th>
-                    <td>vus_max</td>
+                    <td class="text-primary">vus_max</td>
                     <td>8</td>
                     <td>8</td>
                     <td>8</td>

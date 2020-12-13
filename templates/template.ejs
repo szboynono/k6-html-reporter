@@ -23,12 +23,12 @@
       <hr>
       <% if(checks.length > 0) {%>
       <div class="my-2">
-        <button class="btn btn-lg fs-2 my-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+        <button class="btn btn-lg fs-2 my-2 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseExample"
           aria-expanded="false" aria-controls="collapseExample">
           Checks
         </button>
         <div class="collapse show" id="collapseExample">
-          <table class="table table-hover table-sm">
+          <table class="table table-hover table-sm table-borderless">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -45,7 +45,7 @@
               <tr>
                 <% } %>
                 <th scope="row" class="text-secondary"><%= i+1 %></th>
-                <td><%= checks[i].pathArray%></td>
+                <td class="text-primary"><%= checks[i].pathArray%></td>
                 <td><%= checks[i].passes %></td>
                 <td><%= checks[i].fails %></td>
               </tr>
@@ -67,15 +67,15 @@
       </div>
       <% } %>
       <div class="my-2">
-        <button class="btn btn-lg fs-2 px-0 text-dark" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
+        <button class="btn btn-lg fs-2 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
           aria-expanded="false" aria-controls="collapseMetric">
           Metrics
         </button>
         <div class="collapse show" id="collapseMetric">
           <% if(countMetrics.length > 0) {%>
           <div class="my-3">
-            <p>Measured based on rate</p>
-            <table class="table table-hover table-sm">
+            <h6>Measured based on rate</h6>
+            <table class="table table-hover table-sm table-borderless">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -88,7 +88,7 @@
                 <% for(let i=0; i < countMetrics.length; i++) { %>
                 <tr>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
-                  <td><%= countMetrics[i].name %></td>
+                  <td class="text-primary"><%= countMetrics[i].name %></td>
                   <td><%= countMetrics[i].count %></td>
                   <td><%= countMetrics[i].rate %></td>
                 </tr>
@@ -99,9 +99,9 @@
           <% } %>
 
           <% if(timeMetrics.length > 0) {%>
-          <div class="mt-5">
-            <p>Measured based on time</p>
-            <table class="table table-hover table-sm">
+          <div class="mt-4">
+            <h6>Measured based on time</h6>
+            <table class="table table-hover table-sm table-borderless">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -118,13 +118,13 @@
                 <% for(let i=0; i < timeMetrics.length; i++) { %>
                 <tr>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
-                  <td><%= timeMetrics[i].name %></td>
-                  <td><%= timeMetrics[i].avg %></td>
-                  <td><%= timeMetrics[i].max %></td>
-                  <td><%= timeMetrics[i].med %></td>
-                  <td><%= timeMetrics[i].min %></td>
-                  <td><%= timeMetrics[i]["p(90)"] %></td>
-                  <td><%= timeMetrics[i]["p(95)"] %></td>
+                  <td class="text-primary"><%= timeMetrics[i].name %></td>
+                  <td><%= timeMetrics[i].avg.toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i].max.toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i].med.toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i].min.toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i]["p(90)"].toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i]["p(95)"].toFixed(2) %> ms</td>
                 </tr>
                 <% } %>
               </tbody>
@@ -133,9 +133,9 @@
           <% } %>
 
           <% if(vusMetrics.length > 0) {%>
-            <div class="mt-5">
-              <p>Measured based on vus</p>
-              <table class="table table-hover table-sm">
+            <div class="mt-4">
+              <h6>Measured based on vus</h6>
+              <table class="table table-hover table-sm table-borderless">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -149,7 +149,7 @@
                   <% for(let i=0; i < vusMetrics.length; i++) { %>
                   <tr>
                     <th scope="row" class="text-secondary"><%= i+1 %></th>
-                    <td><%= vusMetrics[i].name %></td>
+                    <td class="text-primary"><%= vusMetrics[i].name %></td>
                     <td><%= vusMetrics[i].max %></td>
                     <td><%= vusMetrics[i].min %></td>
                     <td><%= vusMetrics[i].value %></td>
