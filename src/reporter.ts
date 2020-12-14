@@ -86,6 +86,12 @@ function mapMetrics(data: Object) {
           ...value,
           thresholdFailed: thresholdResult(value.thresholds)
         }
+        if (Object.keys(value).includes('thresholds')) {
+          allThresholds.push({
+            name: key,
+            thresholds: value.thresholds
+          });
+        }
       } else if (key.includes('vus')) {
         vusMetrics.push({
           name: key,

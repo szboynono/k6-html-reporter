@@ -20,15 +20,44 @@
         <h1 class="display-4">K6 Summary Report</h1>
         <p class="lead">Powered by k6-html-reporter</p>
       </div>
-      <hr>
+
+      <% if(allThresholds) { %>
+        <div class="my-3">
+          <button class="btn btn-lg fs-2 my-4 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseThreshold"
+          aria-expanded="false" aria-controls="collapseThreshold">
+            Thresholds
+          </button>
+          <div class="collapse show" id="collapseThreshold">
+            <ul class="list-group">
+              <%allThresholds.forEach(data => {%>
+                <li class="list-group-item">
+                  <h6><%= data.name %></h6>
+                  <ul class="list-group">
+                    <% for(let [key, value] of Object.entries(data.thresholds)) {%>
+                    <% if(value === true) { %>
+                    <li class="list-group-item text-white bg-danger">
+                    <%} else {%>
+                    <li class="list-group-item text-white bg-success">
+                    <%}%>
+                      <%= key %>
+                    </li>
+                    <%}%>
+                  </ul>
+                </li>
+              <%})%>
+            </ul>
+          </div>
+        </div>
+      <% } %>
+
       <% if(checks.length > 0) {%>
-      <div class="my-2">
-        <button class="btn btn-lg fs-2 my-2 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+      <div class="my-3">
+        <button class="btn btn-lg fs-2 my-4 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseExample"
           aria-expanded="false" aria-controls="collapseExample">
           Checks
         </button>
         <div class="collapse show" id="collapseExample">
-          <table class="table table-hover table-sm table-borderless">
+          <table class="table table-hover table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -54,34 +83,28 @@
           </table>
           <p class="d-inline-block me-3 text-success">passes: <%= checkMetric.passes %></p>
           <p class="d-inline-block text-danger">fails: <%= checkMetric.fails %></p>
-
+          
           <% if(checkMetric["thresholds"]) { %>
-          <div>
-            <h5 class="d-inline-block">Thresholds:</h5>
-            <ul class="list-group">
-              <%for(let item in checkMetric.thresholds) { %>
-                <% if(checkMetric.thresholds[item] === true){ %>
-                <li class="bg-danger text-white list-group-item"><%= item%></li>
-                <% } else { %>
-                <li class="bg-success text-white list-group-item"><%= item%></li>
-                <% } %>
-              <%}%>
-            </ul>
-          </div>
+            <% if(checkMetric.thresholdFailed === true) { %>
+              <p class="text-danger">Some thresholds failed, more details in the threshold session</p>
+            <% } else { %>
+              <p class="text-success">thresholds for checks passed</p>
+            <% } %>
           <% } %>
         </div>
       </div>
       <% } %>
-      <div class="my-2">
-        <button class="btn btn-lg fs-2 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
+
+      <div class="my-3">
+        <button class="btn btn-lg fs-2 my-4 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
           aria-expanded="false" aria-controls="collapseMetric">
           Metrics
         </button>
         <div class="collapse show" id="collapseMetric">
           <% if(countMetrics.length > 0) {%>
-          <div class="my-3">
+          <div class="my-5">
             <h5 class="text-decoration-underline">Measured based on rate</h5>
-            <table class="table table-hover table-sm table-borderless">
+            <table class="table table-hover table-sm">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -109,9 +132,9 @@
           <% } %>
 
           <% if(timeMetrics.length > 0) {%>
-          <div class="mt-4">
+          <div class="my-5">
             <h5 class="text-decoration-underline">Measured based on time</h5>
-            <table class="table table-hover table-sm table-borderless">
+            <table class="table table-hover table-sm">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -147,9 +170,9 @@
           <% } %>
 
           <% if(vusMetrics.length > 0) {%>
-            <div class="mt-4">
+            <div class="my-5">
               <h5 class="text-decoration-underline">Measured based on vus</h5>
-              <table class="table table-hover table-sm table-borderless">
+              <table class="table table-hover table-sm">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -176,30 +199,6 @@
                 </tbody>
               </table>
             </div>
-          <% } %>
-
-          <% if(allThresholds) { %>
-          <div>
-            <h5 class="text-decoration-underline">Thresholds:</h5>
-            <ul class="list-group">
-              <%allThresholds.forEach(data => {%>
-                <li class="list-group-item">
-                  <h6><%= data.name %></h6>
-                  <ul class="list-group">
-                    <% for(let [key, value] of Object.entries(data.thresholds)) {%>
-                    <% if(value === true) { %>
-                    <li class="list-group-item text-white bg-danger">
-                    <%} else {%>
-                    <li class="list-group-item text-white bg-success">
-                    <%}%>
-                      <%= key %>
-                    </li>
-                    <%}%>
-                  </ul>
-                </li>
-              <%})%>
-            </ul>
-          </div>
           <% } %>
         </div>
       </div>

@@ -20,15 +20,99 @@
         <h1 class="display-4">K6 Summary Report</h1>
         <p class="lead">Powered by k6-html-reporter</p>
       </div>
-      <hr>
+
       
-      <div class="my-2">
-        <button class="btn btn-lg fs-2 my-2 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+        <div class="my-3">
+          <button class="btn btn-lg fs-2 my-4 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseThreshold"
+          aria-expanded="false" aria-controls="collapseThreshold">
+            Thresholds
+          </button>
+          <div class="collapse show" id="collapseThreshold">
+            <ul class="list-group">
+              
+                <li class="list-group-item">
+                  <h6>checks</h6>
+                  <ul class="list-group">
+                    
+                    
+                    <li class="list-group-item text-white bg-success">
+                    
+                      rate&gt;0.90
+                    </li>
+                    
+                  </ul>
+                </li>
+              
+                <li class="list-group-item">
+                  <h6>data_received</h6>
+                  <ul class="list-group">
+                    
+                    
+                    <li class="list-group-item text-white bg-danger">
+                    
+                      p(90) &lt; 400
+                    </li>
+                    
+                    
+                    <li class="list-group-item text-white bg-success">
+                    
+                      p(95) &lt; 1000
+                    </li>
+                    
+                  </ul>
+                </li>
+              
+                <li class="list-group-item">
+                  <h6>http_req_duration</h6>
+                  <ul class="list-group">
+                    
+                    
+                    <li class="list-group-item text-white bg-danger">
+                    
+                      p(90) &lt; 400
+                    </li>
+                    
+                    
+                    <li class="list-group-item text-white bg-success">
+                    
+                      p(95) &lt; 1000
+                    </li>
+                    
+                  </ul>
+                </li>
+              
+                <li class="list-group-item">
+                  <h6>vus</h6>
+                  <ul class="list-group">
+                    
+                    
+                    <li class="list-group-item text-white bg-danger">
+                    
+                      p(90) &lt; 400
+                    </li>
+                    
+                    
+                    <li class="list-group-item text-white bg-success">
+                    
+                      p(95) &lt; 1000
+                    </li>
+                    
+                  </ul>
+                </li>
+              
+            </ul>
+          </div>
+        </div>
+      
+
+      
+      <div class="my-3">
+        <button class="btn btn-lg fs-2 my-4 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseExample"
           aria-expanded="false" aria-controls="collapseExample">
           Checks
         </button>
         <div class="collapse show" id="collapseExample">
-          <table class="table table-hover table-sm table-borderless">
+          <table class="table table-hover table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -97,32 +181,26 @@
           </table>
           <p class="d-inline-block me-3 text-success">passes: 126</p>
           <p class="d-inline-block text-danger">fails: 0</p>
-
           
-          <div>
-            <h5 class="d-inline-block">Thresholds:</h5>
-            <ul class="list-group">
-              
-                
-                <li class="bg-success text-white list-group-item">rate&gt;0.90</li>
-                
-              
-            </ul>
-          </div>
+          
+            
+              <p class="text-success">Thresholds: thresholds for checks passed</p>
+            
           
         </div>
       </div>
       
-      <div class="my-2">
-        <button class="btn btn-lg fs-2 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
+
+      <div class="my-3">
+        <button class="btn btn-lg fs-2 my-4 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
           aria-expanded="false" aria-controls="collapseMetric">
           Metrics
         </button>
         <div class="collapse show" id="collapseMetric">
           
-          <div class="my-3">
+          <div class="my-5">
             <h5 class="text-decoration-underline">Measured based on rate</h5>
-            <table class="table table-hover table-sm table-borderless">
+            <table class="table table-hover table-sm">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -175,9 +253,9 @@
           
 
           
-          <div class="mt-4">
+          <div class="my-5">
             <h5 class="text-decoration-underline">Measured based on time</h5>
-            <table class="table table-hover table-sm table-borderless">
+            <table class="table table-hover table-sm">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -315,9 +393,9 @@
           
 
           
-            <div class="mt-4">
+            <div class="my-5">
               <h5 class="text-decoration-underline">Measured based on vus</h5>
-              <table class="table table-hover table-sm table-borderless">
+              <table class="table table-hover table-sm">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -352,72 +430,6 @@
                 </tbody>
               </table>
             </div>
-          
-
-          
-          <div>
-            <h5 class="text-decoration-underline">Thresholds:</h5>
-            <ul class="list-group">
-              
-                <li class="list-group-item">
-                  <h6>data_received</h6>
-                  <ul class="list-group">
-                    
-                    
-                    <li class="list-group-item text-white bg-danger">
-                    
-                      p(90) &lt; 400
-                    </li>
-                    
-                    
-                    <li class="list-group-item text-white bg-success">
-                    
-                      p(95) &lt; 1000
-                    </li>
-                    
-                  </ul>
-                </li>
-              
-                <li class="list-group-item">
-                  <h6>http_req_duration</h6>
-                  <ul class="list-group">
-                    
-                    
-                    <li class="list-group-item text-white bg-danger">
-                    
-                      p(90) &lt; 400
-                    </li>
-                    
-                    
-                    <li class="list-group-item text-white bg-success">
-                    
-                      p(95) &lt; 1000
-                    </li>
-                    
-                  </ul>
-                </li>
-              
-                <li class="list-group-item">
-                  <h6>vus</h6>
-                  <ul class="list-group">
-                    
-                    
-                    <li class="list-group-item text-white bg-danger">
-                    
-                      p(90) &lt; 400
-                    </li>
-                    
-                    
-                    <li class="list-group-item text-white bg-success">
-                    
-                      p(95) &lt; 1000
-                    </li>
-                    
-                  </ul>
-                </li>
-              
-            </ul>
-          </div>
           
         </div>
       </div>
