@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import ejs from 'ejs';
+import { Options } from './types';
 
 export function generate(options: Options) {
   const resolvedInputPath = path.resolve(process.cwd(), options.jsonFile);
