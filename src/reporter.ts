@@ -39,10 +39,8 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     }
 
     let html = ejs.render(str);
-    fs.writeFile(`${filePath}/report.html`, html, function (err) {
-      if (err) throw err;
-      console.log(`Report is created at ${filePath}`);
-    });
+    fs.writeFileSync(`${filePath}/report.html`, html);
+    console.log(`Report is created at ${filePath}`);
   });
 }
 
