@@ -9,8 +9,6 @@ export function generate(options: Options) {
   writeHtmlReport(jsonReport, resolvedOutputPath);
 }
 
-
-
 function readJsonReport(filePath: string): JSON {
   const resolvedPath = path.resolve(__dirname, filePath);
   const rawData = fs.readFileSync(resolvedPath);
@@ -22,7 +20,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   const checkRootGroupData = content["root_group"];
   const metricsData = content["metrics"];
 
-  const { checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds } = mapMetrics(metricsData);
+  const { checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, failedThresholdsNum } = mapMetrics(metricsData);
 
   const checks = getChecks(checkRootGroupData).map((data) => {
     const splitedPath = data.path.split('::');
@@ -34,7 +32,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     }
   });
 
-  ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds }, {}, function (err, str) {
+  ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, failedThresholdsNum }, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
@@ -53,14 +51,21 @@ function mapMetrics(data: Object) {
   const timeMetrics = [];
   const vusMetrics = [];
   const allThresholds = [];
+  let metricThresholdsPassed = true;
+  let failedThresholdsNum = 0;
 
   Object.entries(data).forEach(
     ([key, value]) => {
       if (Object.keys(value).includes('count')) {
+        const thresholdFailed = thresholdResult(value.thresholds)
+        if (thresholdFailed === true) {
+          failedThresholdsNum++;
+          metricThresholdsPassed = false
+        }
         countMetrics.push({
           name: key,
           ...value,
-          thresholdFailed: thresholdResult(value.thresholds)
+          thresholdFailed
         });
         if (Object.keys(value).includes('thresholds')) {
           allThresholds.push({
@@ -69,10 +74,15 @@ function mapMetrics(data: Object) {
           });
         }
       } else if (Object.keys(value).includes('avg')) {
+        const thresholdFailed = thresholdResult(value.thresholds)
+        if (thresholdFailed === true) {
+          failedThresholdsNum++;
+          metricThresholdsPassed = false
+        }
         timeMetrics.push({
           name: key,
           ...value,
-          thresholdFailed: thresholdResult(value.thresholds)
+          thresholdFailed
         });
         if (Object.keys(value).includes('thresholds')) {
           allThresholds.push({
@@ -81,10 +91,14 @@ function mapMetrics(data: Object) {
           });
         }
       } else if (Object.keys(value).includes('passes')) {
+        const thresholdFailed = thresholdResult(value.thresholds)
+        if (thresholdFailed === true) {
+          failedThresholdsNum++;
+        }
         checkMetric = {
           name: key,
           ...value,
-          thresholdFailed: thresholdResult(value.thresholds)
+          thresholdFailed
         }
         if (Object.keys(value).includes('thresholds')) {
           allThresholds.push({
@@ -93,10 +107,15 @@ function mapMetrics(data: Object) {
           });
         }
       } else if (key.includes('vus')) {
+        const thresholdFailed = thresholdResult(value.thresholds)
+        if (thresholdFailed === true) {
+          failedThresholdsNum++;
+          metricThresholdsPassed = false
+        }
         vusMetrics.push({
           name: key,
           ...value,
-          thresholdFailed: thresholdResult(value.thresholds)
+          thresholdFailed
         });
         if (Object.keys(value).includes('thresholds')) {
           allThresholds.push({
@@ -107,7 +126,7 @@ function mapMetrics(data: Object) {
       }
     }
   );
-  return { checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds }
+  return { checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, failedThresholdsNum }
 }
 
 function thresholdResult(thresholds: Object | undefined): boolean | undefined {

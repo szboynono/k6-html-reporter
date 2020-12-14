@@ -46,6 +46,11 @@
                 </li>
               <%})%>
             </ul>
+            <% if(failedThresholdsNum > 0) { %>
+              <p class="text-danger mt-3"><%=failedThresholdsNum%> thresholds failed</p>
+            <% } else { %>
+              <p class="text-success mt-3">All thresholds passed</p>
+            <% } %>
           </div>
         </div>
       <% } %>
@@ -198,6 +203,11 @@
                   <% } %>
                 </tbody>
               </table>
+              <%if(metricThresholdsPassed === true) {%>
+                <p class="text-success mt-4">thresholds for metrics passed</p>
+              <%} else {%>
+                <p class="text-danger mt-4">Some thresholds failed, more details in the threshold session</p>
+              <%}%>
             </div>
           <% } %>
         </div>
