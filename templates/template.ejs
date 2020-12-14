@@ -45,7 +45,7 @@
               <tr>
                 <% } %>
                 <th scope="row" class="text-secondary"><%= i+1 %></th>
-                <td class="text-primary"><%= checks[i].pathArray%></td>
+                <td><%= checks[i].pathArray%></td>
                 <td><%= checks[i].passes %></td>
                 <td><%= checks[i].fails %></td>
               </tr>
@@ -57,10 +57,16 @@
 
           <% if(checkMetric["thresholds"]) { %>
           <div>
-            <p class="d-inline-block">Thresholds:</p>
-            <%for(let item in checkMetric.thresholds) { %>
-              <p class="d-inline-block"><%= item%>: <%= checkMetric["thresholds"][item]%></p>
-            <%}%>
+            <h5 class="d-inline-block">Thresholds:</h5>
+            <ul class="list-group">
+              <%for(let item in checkMetric.thresholds) { %>
+                <% if(checkMetric.thresholds[item] === true){ %>
+                <li class="bg-danger text-white list-group-item"><%= item%></li>
+                <% } else { %>
+                <li class="bg-success text-white list-group-item"><%= item%></li>
+                <% } %>
+              <%}%>
+            </ul>
           </div>
           <% } %>
         </div>
@@ -74,7 +80,7 @@
         <div class="collapse show" id="collapseMetric">
           <% if(countMetrics.length > 0) {%>
           <div class="my-3">
-            <h6>Measured based on rate</h6>
+            <h5 class="text-decoration-underline">Measured based on rate</h5>
             <table class="table table-hover table-sm table-borderless">
               <thead>
                 <tr>
@@ -86,9 +92,13 @@
               </thead>
               <tbody>
                 <% for(let i=0; i < countMetrics.length; i++) { %>
+                <% if(countMetrics[i].thresholdFailed === true) {%>
+                <tr class="bg-danger text-white">
+                <% } else { %>
                 <tr>
+                <% } %>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
-                  <td class="text-primary"><%= countMetrics[i].name %></td>
+                  <td><%= countMetrics[i].name %></td>
                   <td><%= countMetrics[i].count %></td>
                   <td><%= countMetrics[i].rate %></td>
                 </tr>
@@ -100,7 +110,7 @@
 
           <% if(timeMetrics.length > 0) {%>
           <div class="mt-4">
-            <h6>Measured based on time</h6>
+            <h5 class="text-decoration-underline">Measured based on time</h5>
             <table class="table table-hover table-sm table-borderless">
               <thead>
                 <tr>
@@ -116,9 +126,13 @@
               </thead>
               <tbody>
                 <% for(let i=0; i < timeMetrics.length; i++) { %>
+                <% if(timeMetrics[i].thresholdFailed === true) {%>
+                <tr class="bg-danger text-white">
+                <% } else { %>
                 <tr>
+                <% } %>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
-                  <td class="text-primary"><%= timeMetrics[i].name %></td>
+                  <td><%= timeMetrics[i].name %></td>
                   <td><%= timeMetrics[i].avg.toFixed(2) %> ms</td>
                   <td><%= timeMetrics[i].max.toFixed(2) %> ms</td>
                   <td><%= timeMetrics[i].med.toFixed(2) %> ms</td>
@@ -134,7 +148,7 @@
 
           <% if(vusMetrics.length > 0) {%>
             <div class="mt-4">
-              <h6>Measured based on vus</h6>
+              <h5 class="text-decoration-underline">Measured based on vus</h5>
               <table class="table table-hover table-sm table-borderless">
                 <thead>
                   <tr>
@@ -147,9 +161,13 @@
                 </thead>
                 <tbody>
                   <% for(let i=0; i < vusMetrics.length; i++) { %>
+                  <% if(vusMetrics[i].thresholdFailed === true) {%>
+                  <tr class="bg-danger text-white">
+                  <% } else { %>
                   <tr>
+                  <% } %>
                     <th scope="row" class="text-secondary"><%= i+1 %></th>
-                    <td class="text-primary"><%= vusMetrics[i].name %></td>
+                    <td><%= vusMetrics[i].name %></td>
                     <td><%= vusMetrics[i].max %></td>
                     <td><%= vusMetrics[i].min %></td>
                     <td><%= vusMetrics[i].value %></td>
@@ -160,6 +178,29 @@
             </div>
           <% } %>
 
+          <% if(allThresholds) { %>
+          <div>
+            <h5 class="text-decoration-underline">Thresholds:</h5>
+            <ul class="list-group">
+              <%allThresholds.forEach(data => {%>
+                <li class="list-group-item">
+                  <h6><%= data.name %></h6>
+                  <ul class="list-group">
+                    <% for(let [key, value] of Object.entries(data.thresholds)) {%>
+                    <% if(value === true) { %>
+                    <li class="list-group-item text-white bg-danger">
+                    <%} else {%>
+                    <li class="list-group-item text-white bg-success">
+                    <%}%>
+                      <%= key %>
+                    </li>
+                    <%}%>
+                  </ul>
+                </li>
+              <%})%>
+            </ul>
+          </div>
+          <% } %>
         </div>
       </div>
 

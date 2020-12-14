@@ -10,7 +10,11 @@
         },
         "data_received": {
             "count": 43698360,
-            "rate": 3619698.062612706
+            "rate": 3619698.062612706,
+            "thresholds": {
+                "p(90) < 400": true,
+                "p(95) < 1000": false
+            }
         },
         "data_sent": {
             "count": 102144,
@@ -103,7 +107,11 @@
         "vus": {
             "max": 7,
             "min": 1,
-            "value": 3
+            "value": 3,
+            "thresholds": {
+                "p(90) < 400": true,
+                "p(95) < 1000": false
+            }
         },
         "vus_max": {
             "max": 8,
