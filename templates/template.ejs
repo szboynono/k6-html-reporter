@@ -27,18 +27,19 @@
           aria-expanded="false" aria-controls="collapseThreshold">
             Thresholds
           </button>
-          <% if(totalThresholdResult.fails > 0) { %>
-            <div class="alert alert-danger" role="alert">
-              <%=totalThresholdResult.fails%> thresholds were not met
-            </div>
-          <% } else { %>
-            <div class="alert alert-success" role="alert">
-              All thresholds were met!
-            </div>
-          <% } %>
-          <p class="d-inline-block me-3 text-success">passes: <%= totalThresholdResult.passes %></p>
-          <p class="d-inline-block me-3 text-danger">fails: <%= totalThresholdResult.fails %></p>
+          
           <div class="collapse show" id="collapseThreshold">
+            <% if(totalThresholdResult.fails > 0) { %>
+              <div class="alert alert-danger mt-3" role="alert">
+                <%=totalThresholdResult.fails%> thresholds were not met
+              </div>
+            <% } else { %>
+              <div class="alert alert-success my-2" role="alert">
+                All thresholds were met!
+              </div>
+            <% } %>
+            <p class="d-inline-block me-3 text-success">passes: <%= totalThresholdResult.passes %></p>
+            <p class="d-inline-block me-3 text-danger">fails: <%= totalThresholdResult.fails %></p>
             <ul class="list-group">
               <%allThresholds.forEach(data => {%>
                 <li class="list-group-item">
