@@ -203,11 +203,13 @@
                   <% } %>
                 </tbody>
               </table>
-              <%if(metricThresholdsPassed === true) {%>
-                <p class="text-success mt-4">thresholds for metrics passed</p>
-              <%} else {%>
-                <p class="text-danger mt-4">Some thresholds failed, more details in the threshold session</p>
-              <%}%>
+              <% if(allThresholds.length > 0) { %>
+                <%if(metricThresholdsPassed === true) {%>
+                  <p class="text-success mt-4">thresholds for metrics passed</p>
+                <%} else {%>
+                  <p class="text-danger mt-4">Some thresholds failed, more details in the threshold session</p>
+                <%}%>
+              <% } %>
             </div>
           <% } %>
         </div>
