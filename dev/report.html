@@ -23,10 +23,17 @@
 
       
         <div class="my-3">
-          <button class="btn btn-lg fs-2 my-4 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseThreshold"
+          <button class="btn btn-lg fs-2 mt-4 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseThreshold"
           aria-expanded="false" aria-controls="collapseThreshold">
             Thresholds
           </button>
+          
+            <div class="alert alert-danger" role="alert">
+              3 thresholds were not met
+            </div>
+          
+          <p class="d-inline-block me-3 text-success">passes: 4</p>
+          <p class="d-inline-block me-3 text-danger">fails: 3</p>
           <div class="collapse show" id="collapseThreshold">
             <ul class="list-group">
               
@@ -101,16 +108,13 @@
                 </li>
               
             </ul>
-            
-              <p class="text-danger mt-3">3 thresholds failed</p>
-            
           </div>
         </div>
       
 
       
       <div class="my-3">
-        <button class="btn btn-lg fs-2 my-4 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+        <button class="btn btn-lg fs-2 my-4 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample"
           aria-expanded="false" aria-controls="collapseExample">
           Checks
         </button>
@@ -183,11 +187,12 @@
             </tbody>
           </table>
           <p class="d-inline-block me-3 text-success">passes: 126</p>
-          <p class="d-inline-block text-danger">fails: 0</p>
+          <p class="d-inline-block me-3 text-danger">fails: 0</p>
+          <p class="d-inline-block text-info">pass rate: 100.00%</p>
           
           
             
-              <p class="text-success">thresholds for checks passed</p>
+              <p class="text-success">All thresholds for checks were met</p>
             
           
         </div>
@@ -195,14 +200,14 @@
       
 
       <div class="my-3">
-        <button class="btn btn-lg fs-2 my-4 px-0 text-dark text-decoration-underline" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
+        <button class="btn btn-lg fs-2 mt-4 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
           aria-expanded="false" aria-controls="collapseMetric">
           Metrics
         </button>
         <div class="collapse show" id="collapseMetric">
           
           <div class="my-5">
-            <h5 class="text-decoration-underline">Measured based on rate</h5>
+            <h5>Measured based on rate</h5>
             <table class="table table-hover table-sm">
               <thead>
                 <tr>
@@ -257,7 +262,7 @@
 
           
           <div class="my-5">
-            <h5 class="text-decoration-underline">Measured based on time</h5>
+            <h5>Measured based on time</h5>
             <table class="table table-hover table-sm">
               <thead>
                 <tr>
@@ -397,7 +402,7 @@
 
           
             <div class="my-5">
-              <h5 class="text-decoration-underline">Measured based on vus</h5>
+              <h5>Measured based on vus</h5>
               <table class="table table-hover table-sm">
                 <thead>
                   <tr>
@@ -433,7 +438,9 @@
                 </tbody>
               </table>
               
-                <p class="text-danger mt-4">Some thresholds failed, more details in the threshold session</p>
+                
+                  <p class="text-danger">3 thresholds were not met, more details in the threshold session</p>
+                
               
             </div>
           
