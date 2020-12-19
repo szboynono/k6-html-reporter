@@ -10,6 +10,22 @@
       width: 0px;
       background: transparent; /* make scrollbar transparent */
     }
+    .fail-block {
+      background-color: #F9DCDE;
+      color: #9b0909;
+    }
+    .success-block {
+      background-color: #D7EADA;
+      color: #283618;
+    }
+    .banner-danger {
+      background-color: #D94851;
+      color: white;
+    }
+    .banner-success {
+      background-color: #D7EADA;
+      color: #283618;
+    }
   </style>
 </head>
 
@@ -17,23 +33,26 @@
   <div class="container">
     <div class="jumbotron jumbotron-fluid bg-white my-5">
       <div class="container px-0">
-        <h1 class="display-4">K6 Summary Report</h1>
-        <p class="lead">Powered by k6-html-reporter</p>
+        <h1 class="display-3 text-primary">K6 Summary Report</h1>
+        <p class="text-secondary">Powered by k6-html-reporter</p>
       </div>
 
       
         <div class="my-3">
-          <button class="btn btn-lg fs-2 mt-4 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseThreshold"
-          aria-expanded="false" aria-controls="collapseThreshold">
-            Thresholds
-          </button>
-          
-          <div class="collapse show" id="collapseThreshold">
+          <div class="mt-3">
+            <button class="btn btn-lg fs-2 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseThreshold"
+            aria-expanded="false" aria-controls="collapseThreshold">
+              Thresholds
+            </button>
+            <p class="text-secondary">Pass/fail criteria used to specify the performance expectations of the system under test.</p>
             
-              <div class="alert alert-danger mt-3" role="alert">
+              <div class="alert banner-danger mt-3" role="alert">
                 3 thresholds were not met
               </div>
             
+          </div>
+          
+          <div class="collapse show" id="collapseThreshold">
             <p class="d-inline-block me-3 text-success">passes: 4</p>
             <p class="d-inline-block me-3 text-danger">fails: 3</p>
             <ul class="list-group">
@@ -43,7 +62,7 @@
                   <ul class="list-group">
                     
                     
-                    <li class="list-group-item text-white bg-success">
+                    <li class="list-group-item success-block">
                     
                       rate&gt;0.90
                     </li>
@@ -56,13 +75,13 @@
                   <ul class="list-group">
                     
                     
-                    <li class="list-group-item text-white bg-danger">
+                    <li class="list-group-item fail-block">
                     
                       p(90) &lt; 400
                     </li>
                     
                     
-                    <li class="list-group-item text-white bg-success">
+                    <li class="list-group-item success-block">
                     
                       p(95) &lt; 1000
                     </li>
@@ -75,13 +94,13 @@
                   <ul class="list-group">
                     
                     
-                    <li class="list-group-item text-white bg-danger">
+                    <li class="list-group-item fail-block">
                     
                       p(90) &lt; 400
                     </li>
                     
                     
-                    <li class="list-group-item text-white bg-success">
+                    <li class="list-group-item success-block">
                     
                       p(95) &lt; 1000
                     </li>
@@ -94,13 +113,13 @@
                   <ul class="list-group">
                     
                     
-                    <li class="list-group-item text-white bg-danger">
+                    <li class="list-group-item fail-block">
                     
                       p(90) &lt; 400
                     </li>
                     
                     
-                    <li class="list-group-item text-white bg-success">
+                    <li class="list-group-item success-block">
                     
                       p(95) &lt; 1000
                     </li>
@@ -114,12 +133,15 @@
       
 
       
-      <div class="my-3">
-        <button class="btn btn-lg fs-2 my-4 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-          aria-expanded="false" aria-controls="collapseExample">
-          Checks
-        </button>
-        <div class="collapse show" id="collapseExample">
+      <div>
+        <div>
+          <button class="btn btn-lg fs-2 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            Checks
+          </button>
+          <p class="text-secondary">Asserts that don't halt the execution unless specified in the threshold.</p>
+        </div>
+        <div class="collapse show mt-4" id="collapseExample">
           <table class="table table-hover table-sm">
             <thead>
               <tr>
@@ -200,14 +222,17 @@
       </div>
       
 
-      <div class="my-3">
-        <button class="btn btn-lg fs-2 mt-4 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
-          aria-expanded="false" aria-controls="collapseMetric">
-          Metrics
-        </button>
+      <div class="mt-3">
+        <div>
+          <button class="btn btn-lg fs-2 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
+            aria-expanded="false" aria-controls="collapseMetric">
+            Metrics
+          </button>
+          <p class="text-secondary">Important aspect of metrics management in k6</p>
+        </div>
         <div class="collapse show" id="collapseMetric">
           
-          <div class="my-5">
+          <div class="mb-3">
             <h5>Measured based on rate</h5>
             <table class="table table-hover table-sm">
               <thead>
@@ -221,7 +246,7 @@
               <tbody>
                 
                 
-                <tr class="bg-danger text-white">
+                <tr class="fail-block">
                 
                   <th scope="row" class="text-secondary">1</th>
                   <td>data_received</td>
@@ -262,7 +287,7 @@
           
 
           
-          <div class="my-5">
+          <div class="mb-3">
             <h5>Measured based on time</h5>
             <table class="table table-hover table-sm">
               <thead>
@@ -319,7 +344,7 @@
                 </tr>
                 
                 
-                <tr class="bg-danger text-white">
+                <tr class="fail-block">
                 
                   <th scope="row" class="text-secondary">4</th>
                   <td>http_req_duration</td>
@@ -402,7 +427,7 @@
           
 
           
-            <div class="my-5">
+            <div>
               <h5>Measured based on vus</h5>
               <table class="table table-hover table-sm">
                 <thead>
@@ -417,7 +442,7 @@
                 <tbody>
                   
                   
-                  <tr class="bg-danger text-white">
+                  <tr class="fail-block">
                   
                     <th scope="row" class="text-secondary">1</th>
                     <td>vus</td>

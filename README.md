@@ -1,10 +1,6 @@
 # k6-html-reporter
 A html reporter for k6
 
-***Notes:***
-The project is still under development
-
-
 ## Install
 
 ``` bash
@@ -48,3 +44,6 @@ generateSummaryReport(options);
 ```bash
 node xxxx.js
 ```
+
+### Sample report:
+![Alt text](./screenshot/k6.png?raw=true "Optional Title")
