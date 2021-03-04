@@ -33,6 +33,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     }
   });
 
+
   ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult }, {}, function (err, str) {
     if (err) {
       console.error(err);
@@ -145,15 +146,16 @@ function thresholdResult(thresholds: Object | undefined) {
 }
 
 function getChecks(data: any) {
-  const checksOutput = [];
+  let checksOutput = [];
+  
   findChecksRecursively(data);
 
   function findChecksRecursively(data) {
-    if (data.groups.length === 0) {
+    if (data.groups.length === 0 && data.checks.length === 0) {
       return;
     }
 
-    if (Object.keys(data.checks).length > 0) {
+    if (data.checks.length > 0) {
       Object.values(data.checks).forEach((value) => {
         checksOutput.push(value);
       })
