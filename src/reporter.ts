@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import ejs from 'ejs';
 import { Options } from './types';
-import { fail } from 'assert';
 
 export function generate(options: Options) {
   const resolvedInputPath = path.resolve(process.cwd(), options.jsonFile);
@@ -66,10 +65,10 @@ function mapMetrics(data: Object) {
         ...value,
         thresholdFailed: undefined
       };
-
-      if (Object.keys(value).includes('count')) {
+      if (metric.type === 'counter') {
         if(value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
+
           if (fails > 0) {
             totalThresholdResult.failedMetricsNum++;
             metricThresholdsPassed = false
@@ -83,7 +82,7 @@ function mapMetrics(data: Object) {
           });
         }
         countMetrics.push(metric);
-      } else if (Object.keys(value).includes('avg')) {
+      } else if (metric.type === 'trend') {
         if(value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
           if (fails > 0) {
@@ -99,7 +98,7 @@ function mapMetrics(data: Object) {
           });
         }
         timeMetrics.push(metric);
-      } else if (Object.keys(value).includes('passes')) {
+      } else if (metric.name === 'checks') {
         if(value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
           if (fails > 0) {
@@ -114,7 +113,7 @@ function mapMetrics(data: Object) {
           });
         }
         checkMetric = metric;
-      } else if (key.includes('vus')) {
+      } else if (metric.type === 'gauge') {
         if(value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
           if (fails > 0) {

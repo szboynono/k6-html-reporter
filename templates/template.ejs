@@ -160,8 +160,8 @@
                 <% } %>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
                   <td><%= countMetrics[i].name %></td>
-                  <td><%= countMetrics[i].count %></td>
-                  <td><%= countMetrics[i].rate %></td>
+                  <td><%= countMetrics[i].values.count %></td>
+                  <td><%= countMetrics[i].values.rate %></td>
                 </tr>
                 <% } %>
               </tbody>
@@ -194,12 +194,12 @@
                 <% } %>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
                   <td><%= timeMetrics[i].name %></td>
-                  <td><%= timeMetrics[i].avg.toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i].max.toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i].med.toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i].min.toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i]["p(90)"].toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i]["p(95)"].toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i].values.avg.toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i].values.max.toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i].values.med.toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i].values.min.toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i].values["p(90)"].toFixed(2) %> ms</td>
+                  <td><%= timeMetrics[i].values["p(95)"].toFixed(2) %> ms</td>
                 </tr>
                 <% } %>
               </tbody>
@@ -229,9 +229,9 @@
                   <% } %>
                     <th scope="row" class="text-secondary"><%= i+1 %></th>
                     <td><%= vusMetrics[i].name %></td>
-                    <td><%= vusMetrics[i].max %></td>
-                    <td><%= vusMetrics[i].min %></td>
-                    <td><%= vusMetrics[i].value %></td>
+                    <td><%= vusMetrics[i].values.max %></td>
+                    <td><%= vusMetrics[i].values.min %></td>
+                    <td><%= vusMetrics[i].values.value %></td>
                   </tr>
                   <% } %>
                 </tbody>
