@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import ejs from 'ejs';
 import { Options } from './types';
-import { fail } from 'assert';
 
 export function generate(options: Options) {
   const resolvedInputPath = path.resolve(process.cwd(), options.jsonFile);
@@ -18,12 +17,12 @@ function readJsonReport(filePath: string): JSON {
 }
 
 function writeHtmlReport(content: JSON, filePath: string): void {
+  const time = new Date().toLocaleString();
   const templatePath = path.resolve(__dirname, '../templates/template.ejs');
   const checkRootGroupData = content["root_group"];
   const metricsData = content["metrics"];
 
   const { checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult } = mapMetrics(metricsData);
-
   const checks = getChecks(checkRootGroupData).map((data) => {
     const splitedPath = data.path.split('::');
     splitedPath.shift();
@@ -34,7 +33,8 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     }
   });
 
-  ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult }, {}, function (err, str) {
+
+  ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult, time }, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
@@ -66,10 +66,10 @@ function mapMetrics(data: Object) {
         ...value,
         thresholdFailed: undefined
       };
-
-      if (Object.keys(value).includes('count')) {
-        if(value.thresholds) {
+      if (metric.type === 'counter') {
+        if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
+
           if (fails > 0) {
             totalThresholdResult.failedMetricsNum++;
             metricThresholdsPassed = false
@@ -83,8 +83,8 @@ function mapMetrics(data: Object) {
           });
         }
         countMetrics.push(metric);
-      } else if (Object.keys(value).includes('avg')) {
-        if(value.thresholds) {
+      } else if (metric.type === 'trend') {
+        if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
           if (fails > 0) {
             totalThresholdResult.failedMetricsNum++;
@@ -99,8 +99,8 @@ function mapMetrics(data: Object) {
           });
         }
         timeMetrics.push(metric);
-      } else if (Object.keys(value).includes('passes')) {
-        if(value.thresholds) {
+      } else if (metric.name === 'checks') {
+        if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
           if (fails > 0) {
             totalThresholdResult.failedMetricsNum++;
@@ -114,8 +114,8 @@ function mapMetrics(data: Object) {
           });
         }
         checkMetric = metric;
-      } else if (key.includes('vus')) {
-        if(value.thresholds) {
+      } else if (metric.type === 'gauge') {
+        if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
           if (fails > 0) {
             totalThresholdResult.failedMetricsNum++;
@@ -139,22 +139,23 @@ function mapMetrics(data: Object) {
 function thresholdResult(thresholds: Object | undefined) {
   if (thresholds) {
     const thresholdArr = Object.values(thresholds);
-    const passes = thresholdArr.filter(value => value === false).length;
+    const passes = thresholdArr.filter(value => value.ok === true).length;
     const fails = thresholdArr.length - passes;
     return [passes, fails];
   }
 }
 
 function getChecks(data: any) {
-  const checksOutput = [];
+  let checksOutput = [];
+
   findChecksRecursively(data);
 
   function findChecksRecursively(data) {
-    if (data.groups.length === 0) {
+    if (data.groups.length === 0 && data.checks.length === 0) {
       return;
     }
 
-    if (Object.keys(data.checks).length > 0) {
+    if (data.checks.length > 0) {
       Object.values(data.checks).forEach((value) => {
         checksOutput.push(value);
       })

@@ -2,9 +2,16 @@
 A html reporter for k6
 
 ## Install
+NPM:
 
 ``` bash
 npm install k6-html-reporter --save-dev
+```
+
+YARN:
+
+```bash
+yarn add k6-html-reporter --dev
 ```
 
 
@@ -39,7 +46,19 @@ const options = {
 
 generateSummaryReport(options);
 ```
-3. Run the k6 test with this command ```k6 run --summary-export=<path-to-json-report> <test-script>``` to output a json summary report
+3. Output a JSON summary output with the `handleSummary` function provided by k6, [more info](https://k6.io/docs/results-visualization/end-of-test-summary).
+```js
+export default function () { /** some tests here */}
+export function handleSummary(data) {
+  console.log('Preparing the end-of-test summary...');
+  return {
+      <path-to-json-report>: JSON.stringify(data),
+  }
+}
+```
+
+> **Note**: The ` --summary-export=path/to/file.json` run option is no longer recomanded after k6 v0.30.0.
+
 4. Run the code in step two as a node.js script after the test execution:
 ```bash
 node xxxx.js
