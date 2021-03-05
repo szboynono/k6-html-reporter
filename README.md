@@ -46,7 +46,7 @@ const options = {
 
 generateSummaryReport(options);
 ```
-3. Output a JSON summary output with the `handleSummary` function provided by k6, [more info](https://k6.io/docs/results-visualization/end-of-test-summary):
+3. Output a JSON summary output with the `handleSummary` function provided by k6, [more info](https://k6.io/docs/results-visualization/end-of-test-summary).
 ```js
 export default function () { /** some tests here */}
 export function handleSummary(data) {
