@@ -57,7 +57,7 @@ export function handleSummary(data) {
 }
 ```
 
-> **Note**: The ` --summary-export=path/to/file.json` run option is no longer recomanded after k6 v0.30.0, [more info here]("https://k6.io/docs/results-visualization/end-of-test-summary").
+> **Note**: The ` --summary-export=path/to/file.json` run option is no longer recomanded after k6 v0.30.0.
 
 4. Run the code in step two as a node.js script after the test execution:
 ```bash
