@@ -22,7 +22,6 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   const metricsData = content["metrics"];
 
   const { checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult } = mapMetrics(metricsData);
-
   const checks = getChecks(checkRootGroupData).map((data) => {
     const splitedPath = data.path.split('::');
     splitedPath.shift();
@@ -139,7 +138,7 @@ function mapMetrics(data: Object) {
 function thresholdResult(thresholds: Object | undefined) {
   if (thresholds) {
     const thresholdArr = Object.values(thresholds);
-    const passes = thresholdArr.filter(value => value === false).length;
+    const passes = thresholdArr.filter(value => value.ok === true).length;
     const fails = thresholdArr.length - passes;
     return [passes, fails];
   }

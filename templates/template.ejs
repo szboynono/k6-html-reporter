@@ -65,7 +65,7 @@
                   <h6><%= data.name %></h6>
                   <ul class="list-group">
                     <% for(let [key, value] of Object.entries(data.thresholds)) {%>
-                    <% if(value === true) { %>
+                    <% if(value.ok === false) { %>
                     <li class="list-group-item fail-block">
                     <%} else {%>
                     <li class="list-group-item success-block">
@@ -115,9 +115,9 @@
               <% } %>
             </tbody>
           </table>
-          <p class="d-inline-block me-3 text-success">passes: <%= checkMetric.passes %></p>
-          <p class="d-inline-block me-3 text-danger">fails: <%= checkMetric.fails %></p>
-          <p class="d-inline-block text-info">pass rate: <%= (checkMetric.passes * 100/(checkMetric.fails + checkMetric.passes)).toFixed(2) %>%</p>
+          <p class="d-inline-block me-3 text-success">passes: <%= checkMetric.values.passes %></p>
+          <p class="d-inline-block me-3 text-danger">fails: <%= checkMetric.values.fails %></p>
+          <p class="d-inline-block text-info">pass rate: <%= (checkMetric.values.passes * 100/(checkMetric.values.fails + checkMetric.values.passes)).toFixed(2) %>%</p>
           
           <% if(checkMetric["thresholds"]) { %>
             <% if(checkMetric.thresholdFailed === true) { %>
