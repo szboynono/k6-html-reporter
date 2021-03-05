@@ -3,8 +3,7 @@
 
 <head>
   <title>K6 Summary Report</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <style>
     ::-webkit-scrollbar {
       width: 0px;
@@ -32,22 +31,22 @@
 <body>
   <div class="container">
     <div class="jumbotron jumbotron-fluid bg-white my-5">
-      <div class="container px-0">
-        <h1 class="display-3 text-primary">K6 Summary Report</h1>
-        <p class="text-secondary">Powered by k6-html-reporter</p>
+      <div class="container px-0 mb-5">
+        <h1 class="display-2 text-primary text-dark text-center">K6 Summary Report</h1>
+        <p class="text-secondary text-center">Powered by k6-html-reporter</p>
       </div>
 
       <% if(allThresholds.length > 0) { %>
         <div class="my-3">
           <div class="mt-3">
-            <button class="btn btn-lg fs-2 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseThreshold"
+            <button class="btn btn-lg fs-2 px-0 text-primary" style="box-shadow: none;" data-bs-toggle="collapse" data-bs-target="#collapseThreshold"
             aria-expanded="false" aria-controls="collapseThreshold">
               Thresholds
             </button>
             <p class="text-secondary">Pass/fail criteria used to specify the performance expectations of the system under test.</p>
             <% if(totalThresholdResult.fails > 0) { %>
-              <div class="alert banner-danger mt-3" role="alert">
-                <%=totalThresholdResult.fails%> thresholds were not met
+              <div class="alert alert-warning alert-dismissible fade show banner-danger mt-3" role="alert">
+                <%=totalThresholdResult.fails%> <%if(totalThresholdResult.fails === 1){%>threshold was<%} else {%>thresholds were<%}%> not met
               </div>
             <% } else { %>
               <div class="alert banner-success my-2" role="alert">
@@ -84,7 +83,7 @@
       <% if(checks.length > 0) {%>
       <div>
         <div>
-          <button class="btn btn-lg fs-2 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+          <button class="btn btn-lg fs-2 px-0 text-primary" style="box-shadow: none;" data-bs-toggle="collapse" data-bs-target="#collapseExample"
             aria-expanded="false" aria-controls="collapseExample">
             Checks
           </button>
@@ -132,7 +131,7 @@
 
       <div class="mt-3">
         <div>
-          <button class="btn btn-lg fs-2 px-0 text-primary" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
+          <button class="btn btn-lg fs-2 px-0 text-primary" style="box-shadow: none;" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
             aria-expanded="false" aria-controls="collapseMetric">
             Metrics
           </button>
@@ -239,8 +238,8 @@
               <% if(allThresholds.length > 0) { %>
                 <%if(metricThresholdsPassed === true) {%>
                   <p class="text-success mt-4">All thresholds for metrics were met</p>
-                <%} else {%>
-                  <p class="text-danger"><%=totalThresholdResult.failedMetricsNum%> thresholds were not met, more details in the threshold session</p>
+                <%} else {%> 
+                  <p class="text-danger"><%=totalThresholdResult.failedMetricsNum%> <%if(totalThresholdResult.failedMetricsNum === 1){%>threshold was<%} else {%>thresholds were<%}%> not met, more details in the threshold session</p>
                 <%}%>
               <% } %>
             </div>
@@ -254,9 +253,7 @@
 
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 
 </html>
