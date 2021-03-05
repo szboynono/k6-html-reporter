@@ -17,6 +17,7 @@ function readJsonReport(filePath: string): JSON {
 }
 
 function writeHtmlReport(content: JSON, filePath: string): void {
+  const time = new Date().toLocaleString();
   const templatePath = path.resolve(__dirname, '../templates/template.ejs');
   const checkRootGroupData = content["root_group"];
   const metricsData = content["metrics"];
@@ -33,7 +34,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   });
 
 
-  ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult }, {}, function (err, str) {
+  ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult, time }, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
@@ -66,7 +67,7 @@ function mapMetrics(data: Object) {
         thresholdFailed: undefined
       };
       if (metric.type === 'counter') {
-        if(value.thresholds) {
+        if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
 
           if (fails > 0) {
@@ -83,7 +84,7 @@ function mapMetrics(data: Object) {
         }
         countMetrics.push(metric);
       } else if (metric.type === 'trend') {
-        if(value.thresholds) {
+        if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
           if (fails > 0) {
             totalThresholdResult.failedMetricsNum++;
@@ -99,7 +100,7 @@ function mapMetrics(data: Object) {
         }
         timeMetrics.push(metric);
       } else if (metric.name === 'checks') {
-        if(value.thresholds) {
+        if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
           if (fails > 0) {
             totalThresholdResult.failedMetricsNum++;
@@ -114,7 +115,7 @@ function mapMetrics(data: Object) {
         }
         checkMetric = metric;
       } else if (metric.type === 'gauge') {
-        if(value.thresholds) {
+        if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
           if (fails > 0) {
             totalThresholdResult.failedMetricsNum++;
@@ -146,7 +147,7 @@ function thresholdResult(thresholds: Object | undefined) {
 
 function getChecks(data: any) {
   let checksOutput = [];
-  
+
   findChecksRecursively(data);
 
   function findChecksRecursively(data) {
