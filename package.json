@@ -1,6 +1,6 @@
 {
   "name": "k6-html-reporter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A html reporter for k6",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
