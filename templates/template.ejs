@@ -120,7 +120,7 @@
           
           <% if(checkMetric["thresholds"]) { %>
             <% if(checkMetric.thresholdFailed === true) { %>
-              <p class="text-danger">Some thresholds were not met, more details in the threshold session</p>
+              <p class="text-danger">Threshold for checks was not met, more details in the threshold session</p>
             <% } else { %>
               <p class="text-success">All thresholds for checks were met</p>
             <% } %>
@@ -239,7 +239,7 @@
                 <%if(metricThresholdsPassed === true) {%>
                   <p class="text-success mt-4">All thresholds for metrics were met</p>
                 <%} else {%> 
-                  <p class="text-danger"><%=totalThresholdResult.failedMetricsNum%> <%if(totalThresholdResult.failedMetricsNum === 1){%>threshold was<%} else {%>thresholds were<%}%> not met, more details in the threshold session</p>
+                  <p class="text-danger"><%=totalThresholdResult.failedMetricsNum%> <%if(totalThresholdResult.failedMetricsNum === 1){%>metric<%} else {%>metrics<%}%> failed the thresholds, more details in the threshold session</p>
                 <%}%>
               <% } %>
             </div>

@@ -33,7 +33,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     }
   });
 
-
+  console.log(checkMetric)
   ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult, time }, {}, function (err, str) {
     if (err) {
       console.error(err);
@@ -102,9 +102,6 @@ function mapMetrics(data: Object) {
       } else if (metric.name === 'checks') {
         if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
-          if (fails > 0) {
-            totalThresholdResult.failedMetricsNum++;
-          }
           totalThresholdResult.passes += passes;
           totalThresholdResult.fails += fails;
           metric.thresholdFailed = fails > 0;
