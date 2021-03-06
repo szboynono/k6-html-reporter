@@ -130,7 +130,7 @@
       <% } %>
 
       <div class="mt-3">
-        <div>
+        <div class="mb-4">
           <button class="btn btn-lg fs-2 px-0 text-primary" style="box-shadow: none;" data-bs-toggle="collapse" data-bs-target="#collapseMetric"
             aria-expanded="false" aria-controls="collapseMetric">
             Metrics
@@ -139,7 +139,7 @@
         </div>
         <div class="collapse show" id="collapseMetric">
           <% if(counterMetrics.length > 0) {%>
-          <div class="mb-3">
+          <div class="mb-5">
             <h5>A metric that cumulatively sums added values.</h5>
             <table class="table table-hover table-sm">
               <thead>
@@ -169,7 +169,7 @@
           <% } %>
 
           <% if(trendMetrics.length > 0) {%>
-          <div class="mb-3">
+          <div class="mb-5">
             <h5>A metric that allows for calculating statistics on the added values (min, max, average and percentiles).</h5>
             <table class="table table-hover table-sm">
               <thead>
@@ -207,7 +207,7 @@
           <% } %>
 
           <% if(rateMetrics.length > 0) {%>
-            <div class="mb-3">
+            <div class="mb-5">
               <h5>A metric that tracks the percentage of added values that are non-zero.</h5>
               <table class="table table-hover table-sm">
                 <thead>
