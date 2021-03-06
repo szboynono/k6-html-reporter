@@ -138,9 +138,9 @@
           <p class="text-secondary">Important aspect of metrics management in k6</p>
         </div>
         <div class="collapse show" id="collapseMetric">
-          <% if(countMetrics.length > 0) {%>
+          <% if(counterMetrics.length > 0) {%>
           <div class="mb-3">
-            <h5>Measured based on rate</h5>
+            <h5>A metric that cumulatively sums added values.</h5>
             <table class="table table-hover table-sm">
               <thead>
                 <tr>
@@ -151,16 +151,16 @@
                 </tr>
               </thead>
               <tbody>
-                <% for(let i=0; i < countMetrics.length; i++) { %>
-                <% if(countMetrics[i].thresholdFailed === true) {%>
+                <% for(let i=0; i < counterMetrics.length; i++) { %>
+                <% if(counterMetrics[i].thresholdFailed === true) {%>
                 <tr class="fail-block">
                 <% } else { %>
                 <tr>
                 <% } %>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
-                  <td><%= countMetrics[i].name %></td>
-                  <td><%= countMetrics[i].values.count %></td>
-                  <td><%= countMetrics[i].values.rate %></td>
+                  <td><%= counterMetrics[i].name %></td>
+                  <td><%= counterMetrics[i].values.count %></td>
+                  <td><%= counterMetrics[i].values.rate %></td>
                 </tr>
                 <% } %>
               </tbody>
@@ -168,9 +168,9 @@
           </div>
           <% } %>
 
-          <% if(timeMetrics.length > 0) {%>
+          <% if(trendMetrics.length > 0) {%>
           <div class="mb-3">
-            <h5>Measured based on time</h5>
+            <h5>A metric that allows for calculating statistics on the added values (min, max, average and percentiles).</h5>
             <table class="table table-hover table-sm">
               <thead>
                 <tr>
@@ -185,20 +185,20 @@
                 </tr>
               </thead>
               <tbody>
-                <% for(let i=0; i < timeMetrics.length; i++) { %>
-                <% if(timeMetrics[i].thresholdFailed === true) {%>
+                <% for(let i=0; i < trendMetrics.length; i++) { %>
+                <% if(trendMetrics[i].thresholdFailed === true) {%>
                 <tr class="fail-block">
                 <% } else { %>
                 <tr>
                 <% } %>
                   <th scope="row" class="text-secondary"><%= i+1 %></th>
-                  <td><%= timeMetrics[i].name %></td>
-                  <td><%= timeMetrics[i].values.avg.toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i].values.max.toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i].values.med.toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i].values.min.toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i].values["p(90)"].toFixed(2) %> ms</td>
-                  <td><%= timeMetrics[i].values["p(95)"].toFixed(2) %> ms</td>
+                  <td><%= trendMetrics[i].name %></td>
+                  <td><%= trendMetrics[i].values.avg.toFixed(2) %> ms</td>
+                  <td><%= trendMetrics[i].values.max.toFixed(2) %> ms</td>
+                  <td><%= trendMetrics[i].values.med.toFixed(2) %> ms</td>
+                  <td><%= trendMetrics[i].values.min.toFixed(2) %> ms</td>
+                  <td><%= trendMetrics[i].values["p(90)"].toFixed(2) %> ms</td>
+                  <td><%= trendMetrics[i].values["p(95)"].toFixed(2) %> ms</td>
                 </tr>
                 <% } %>
               </tbody>
@@ -206,9 +206,41 @@
           </div>
           <% } %>
 
-          <% if(vusMetrics.length > 0) {%>
+          <% if(rateMetrics.length > 0) {%>
+            <div class="mb-3">
+              <h5>A metric that tracks the percentage of added values that are non-zero.</h5>
+              <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">rate</th>
+                    <th scope="col">passes</th>
+                    <th scope="col">fails</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(let i=0; i < rateMetrics.length; i++) { %>
+                  <% if(rateMetrics[i].thresholdFailed === true) {%>
+                  <tr class="fail-block">
+                  <% } else { %>
+                  <tr>
+                  <% } %>
+                    <th scope="row" class="text-secondary"><%= i+1 %></th>
+                    <td><%= rateMetrics[i].name %></td>
+                    <td><%= rateMetrics[i].values.rate %></td>
+                    <td><%= rateMetrics[i].values.passes %></td>
+                    <td><%= rateMetrics[i].values.fails %></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          <% } %>
+
+          <% if(gaugeMetrics.length > 0) {%>
             <div>
-              <h5>Measured based on vus</h5>
+              <h5>A metric that stores the min, max and last values added to it.</h5>
               <table class="table table-hover table-sm">
                 <thead>
                   <tr>
@@ -220,17 +252,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% for(let i=0; i < vusMetrics.length; i++) { %>
-                  <% if(vusMetrics[i].thresholdFailed === true) {%>
+                  <% for(let i=0; i < gaugeMetrics.length; i++) { %>
+                  <% if(gaugeMetrics[i].thresholdFailed === true) {%>
                   <tr class="fail-block">
                   <% } else { %>
                   <tr>
                   <% } %>
                     <th scope="row" class="text-secondary"><%= i+1 %></th>
-                    <td><%= vusMetrics[i].name %></td>
-                    <td><%= vusMetrics[i].values.max %></td>
-                    <td><%= vusMetrics[i].values.min %></td>
-                    <td><%= vusMetrics[i].values.value %></td>
+                    <td><%= gaugeMetrics[i].name %></td>
+                    <td><%= gaugeMetrics[i].values.max %></td>
+                    <td><%= gaugeMetrics[i].values.min %></td>
+                    <td><%= gaugeMetrics[i].values.value %></td>
                   </tr>
                   <% } %>
                 </tbody>

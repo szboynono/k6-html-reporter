@@ -33,7 +33,7 @@
     <div class="jumbotron jumbotron-fluid bg-white my-5">
       <div class="container px-0 mb-5">
         <h1 class="display-2 text-primary text-dark text-center">K6 Summary Report</h1>
-        <p class="text-secondary text-center">Generated at 3/6/2021, 4:12:37 PM</p>
+        <p class="text-secondary text-center">Generated at 3/6/2021, 5:06:19 PM</p>
       </div>
 
       
@@ -46,14 +46,14 @@
             <p class="text-secondary">Pass/fail criteria used to specify the performance expectations of the system under test.</p>
             
               <div class="alert alert-warning alert-dismissible fade show banner-danger mt-3" role="alert">
-                3 thresholds were not met
+                4 thresholds were not met
               </div>
             
           </div>
           
           <div class="collapse show" id="collapseThreshold">
             <p class="d-inline-block me-3 text-success">passes: 2</p>
-            <p class="d-inline-block me-3 text-danger">fails: 3</p>
+            <p class="d-inline-block me-3 text-danger">fails: 4</p>
             <ul class="list-group">
               
                 <li class="list-group-item">
@@ -89,6 +89,19 @@
                     <li class="list-group-item success-block">
                     
                       p(99.9) &lt; 2000
+                    </li>
+                    
+                  </ul>
+                </li>
+              
+                <li class="list-group-item">
+                  <h6>errorRate</h6>
+                  <ul class="list-group">
+                    
+                    
+                    <li class="list-group-item fail-block">
+                    
+                      rate &lt; 0.1
                     </li>
                     
                   </ul>
@@ -186,7 +199,7 @@
         <div class="collapse show" id="collapseMetric">
           
           <div class="mb-3">
-            <h5>Measured based on rate</h5>
+            <h5>A metric that cumulatively sums added values.</h5>
             <table class="table table-hover table-sm">
               <thead>
                 <tr>
@@ -241,7 +254,7 @@
 
           
           <div class="mb-3">
-            <h5>Measured based on time</h5>
+            <h5>A metric that allows for calculating statistics on the added values (min, max, average and percentiles).</h5>
             <table class="table table-hover table-sm">
               <thead>
                 <tr>
@@ -380,8 +393,38 @@
           
 
           
+            <div class="mb-3">
+              <h5>A metric that tracks the percentage of added values that are non-zero.</h5>
+              <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">rate</th>
+                    <th scope="col">passes</th>
+                    <th scope="col">fails</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  
+                  <tr class="fail-block">
+                  
+                    <th scope="row" class="text-secondary">1</th>
+                    <td>errorRate</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>29</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          
+
+          
             <div>
-              <h5>Measured based on vus</h5>
+              <h5>A metric that stores the min, max and last values added to it.</h5>
               <table class="table table-hover table-sm">
                 <thead>
                   <tr>
@@ -418,7 +461,7 @@
               </table>
               
                  
-                  <p class="text-danger">2 metrics failed the thresholds, more details in the threshold session</p>
+                  <p class="text-danger">3 metrics failed the thresholds, more details in the threshold session</p>
                 
               
             </div>

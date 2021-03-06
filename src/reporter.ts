@@ -22,7 +22,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
   const checkRootGroupData = content["root_group"];
   const metricsData = content["metrics"];
 
-  const { checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult } = mapMetrics(metricsData);
+  const { checkMetric, counterMetrics, trendMetrics, gaugeMetrics, rateMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult } = mapMetrics(metricsData);
   const checks = getChecks(checkRootGroupData).map((data) => {
     const splitedPath = data.path.split('::');
     splitedPath.shift();
@@ -33,8 +33,7 @@ function writeHtmlReport(content: JSON, filePath: string): void {
     }
   });
 
-  console.log(checkMetric)
-  ejs.renderFile(templatePath, { checks, checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult, time }, {}, function (err, str) {
+  ejs.renderFile(templatePath, { checks, rateMetrics, checkMetric, counterMetrics, trendMetrics, gaugeMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult, time }, {}, function (err, str) {
     if (err) {
       console.error(err);
     }
@@ -47,9 +46,10 @@ function writeHtmlReport(content: JSON, filePath: string): void {
 
 function mapMetrics(data: Object) {
   let checkMetric = {};
-  const countMetrics = [];
-  const timeMetrics = [];
-  const vusMetrics = [];
+  const counterMetrics = [];
+  const trendMetrics = [];
+  const gaugeMetrics = [];
+  const rateMetrics = [];
   const allThresholds = [];
   let metricThresholdsPassed = true;
 
@@ -82,7 +82,7 @@ function mapMetrics(data: Object) {
             thresholds: value.thresholds
           });
         }
-        countMetrics.push(metric);
+        counterMetrics.push(metric);
       } else if (metric.type === 'trend') {
         if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
@@ -98,7 +98,7 @@ function mapMetrics(data: Object) {
             thresholds: value.thresholds
           });
         }
-        timeMetrics.push(metric);
+        trendMetrics.push(metric);
       } else if (metric.name === 'checks') {
         if (value.thresholds) {
           const [passes, fails] = thresholdResult(value.thresholds);
@@ -126,11 +126,27 @@ function mapMetrics(data: Object) {
             thresholds: value.thresholds
           });
         }
-        vusMetrics.push(metric);
+        gaugeMetrics.push(metric);
+      } else if (metric.type === 'rate' && metric.name !== 'checks') {
+        if (value.thresholds) {
+          const [passes, fails] = thresholdResult(value.thresholds);
+          if (fails > 0) {
+            totalThresholdResult.failedMetricsNum++;
+            metricThresholdsPassed = false
+          }
+          totalThresholdResult.passes += passes;
+          totalThresholdResult.fails += fails;
+          metric.thresholdFailed = fails > 0;
+          allThresholds.push({
+            name: key,
+            thresholds: value.thresholds
+          });
+        }
+        rateMetrics.push(metric);
       }
     }
   );
-  return { checkMetric, countMetrics, timeMetrics, vusMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult }
+  return { checkMetric, counterMetrics, trendMetrics, gaugeMetrics, rateMetrics, allThresholds, metricThresholdsPassed, totalThresholdResult }
 }
 
 function thresholdResult(thresholds: Object | undefined) {
