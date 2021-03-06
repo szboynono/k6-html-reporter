@@ -25,7 +25,10 @@
   "keywords": [
     "report",
     "k6",
-    "html"
+    "html",
+    "json to html",
+    "k6 html reporter",
+    "k6 summary report"
   ],
   "author": "",
   "license": "ISC",
