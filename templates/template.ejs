@@ -268,7 +268,7 @@
                 </tbody>
               </table>
               <% if(allThresholds.length > 0) { %>
-                <%if(metricThresholdsPassed === true) {%>
+                <%if(totalThresholdResult.failedMetricsNum === 0) {%>
                   <p class="text-success mt-4">All thresholds for metrics were met</p>
                 <%} else {%> 
                   <p class="text-danger"><%=totalThresholdResult.failedMetricsNum%> <%if(totalThresholdResult.failedMetricsNum === 1){%>metric<%} else {%>metrics<%}%> failed the thresholds, more details in the threshold session</p>
