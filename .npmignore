@@ -2,3 +2,6 @@
 /src
 node_modules
 /screenshot
+*.test.ts
+*.tgz
+jest.config.js
