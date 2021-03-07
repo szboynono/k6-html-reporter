@@ -1,5 +1,9 @@
 # k6-html-reporter
+
 A html reporter for k6
+
+[![Build Status](https://travis-ci.com/szboynono/k6-html-reporter.svg?branch=main)](https://travis-ci.com/szboynono/k6-html-reporter)
+[![Generic badge](https://img.shields.io/badge/version-1.0.1-<COLOR>.svg)](https://shields.io/)
 
 ## Install
 NPM:
