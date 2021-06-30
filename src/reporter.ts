@@ -1,7 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import ejs from 'ejs';
-import { DisplayTotalThresholdResult, MetricsType, Options } from './types';
+import fs from "fs";
+import path from "path";
+import ejs from "ejs";
+import { DisplayTotalThresholdResult, MetricsType, Options } from "./types";
+import { compareNameAscending } from "./util";
 
 export function generate(options: Options) {
   const resolvedInputPath = path.resolve(process.cwd(), options.jsonFile);
@@ -18,30 +19,56 @@ function readJsonReport(filePath: string): JSON {
 
 function writeHtmlReport(content: JSON, filePath: string): void {
   const time = new Date().toLocaleString();
-  const templatePath = path.resolve(__dirname, '../templates/template.ejs');
+  const templatePath = path.resolve(__dirname, "../templates/template.ejs");
   const checkRootGroupData = content["root_group"];
   const metricsData = content["metrics"];
 
-  const { checkMetric, counterMetrics, trendMetrics, gaugeMetrics, rateMetrics, allThresholds, totalThresholdResult } = mapMetrics(metricsData);
+  const {
+    checkMetric,
+    counterMetrics,
+    trendMetrics,
+    gaugeMetrics,
+    rateMetrics,
+    allThresholds,
+    totalThresholdResult,
+  } = mapMetrics(metricsData);
   const checks = getChecks(checkRootGroupData).map((data) => {
-    const splitedPath = data.path.split('::');
+    const splitedPath = data.path.split("::");
     splitedPath.shift();
 
     return {
       ...data,
-      pathArray: splitedPath.join(" \u21C0 ")
-    }
+      pathArray: splitedPath.join(" \u21C0 "),
+    };
   });
 
-  ejs.renderFile(templatePath, { checks, rateMetrics, checkMetric, counterMetrics, trendMetrics, gaugeMetrics, allThresholds, totalThresholdResult, time }, {}, function (err, str) {
-    if (err) {
-      console.error(err);
-    }
+  ejs.renderFile(
+    templatePath,
+    {
+      checks,
+      rateMetrics: rateMetrics.sort(compareNameAscending),
+      checkMetric,
+      counterMetrics: counterMetrics.sort(compareNameAscending),
+      trendMetrics: trendMetrics.sort(compareNameAscending),
+      gaugeMetrics: gaugeMetrics.sort(compareNameAscending),
+      allThresholds,
+      totalThresholdResult,
+      time,
+    },
+    {},
+    function (err, str) {
+      if (err) {
+        console.error(err);
+      }
 
-    let html = ejs.render(str);
-    fs.writeFileSync(`${filePath}/report.html`, html);
-    console.log(`Report is created at ${filePath}`);
-  });
+      let html = ejs.render(str);
+      if (!fs.existsSync(filePath)) {
+        fs.mkdirSync(filePath, { recursive: true });
+      }
+      fs.writeFileSync(`${filePath}/report.html`, html);
+      console.log(`Report is created at ${filePath}`);
+    }
+  );
 }
 
 function mapMetrics(data: Object) {
@@ -55,80 +82,95 @@ function mapMetrics(data: Object) {
   let totalThresholdResult: DisplayTotalThresholdResult = {
     passes: 0,
     fails: 0,
-    failedMetricsNum: 0
-  }
+    failedMetricsNum: 0,
+  };
 
-  Object.entries(data).forEach(
-    ([key, value]) => {
-      if (value.type === MetricsType.COUNTER) {
-        const {updatedThresholdResult, displayThreshold, metric} = handleMetricValues(key, value, totalThresholdResult)
-        totalThresholdResult = {
-          ...totalThresholdResult,
-          ...updatedThresholdResult
-        }
-        if(displayThreshold) {
-          allThresholds.push(displayThreshold)
-        }
-        counterMetrics.push(metric);
-      } else if (value.type === MetricsType.TREND) {
-        const {updatedThresholdResult, displayThreshold, metric} = handleMetricValues(key, value, totalThresholdResult)
-        totalThresholdResult = {
-          ...totalThresholdResult,
-          ...updatedThresholdResult
-        }
-        if(displayThreshold) {
-          allThresholds.push(displayThreshold)
-        }
-        trendMetrics.push(metric);
-      } else if (key === 'checks') {
-        const {updatedThresholdResult, displayThreshold, metric} = handleMetricValues(key, value, totalThresholdResult)
-        totalThresholdResult = {
-          ...totalThresholdResult,
-          ...updatedThresholdResult
-        }
-        if(displayThreshold) {
-          allThresholds.push(displayThreshold)
-        }
-        checkMetric = metric;
-      } else if (value.type === MetricsType.GAUGE) {
-        const {updatedThresholdResult, displayThreshold, metric} = handleMetricValues(key, value, totalThresholdResult)
-        totalThresholdResult = {
-          ...totalThresholdResult,
-          ...updatedThresholdResult
-        }
-        if(displayThreshold) {
-          allThresholds.push(displayThreshold)
-        }
-        gaugeMetrics.push(metric);
-      } else if (value.type === MetricsType.RATE && key !== 'checks') {
-        const {updatedThresholdResult, displayThreshold, metric} = handleMetricValues(key, value, totalThresholdResult)
-        totalThresholdResult = {
-          ...totalThresholdResult,
-          ...updatedThresholdResult
-        }
-        if(displayThreshold) {
-          allThresholds.push(displayThreshold)
-        }
-        rateMetrics.push(metric);
+  Object.entries(data).forEach(([key, value]) => {
+    if (value.type === MetricsType.COUNTER) {
+      const { updatedThresholdResult, displayThreshold, metric } =
+        handleMetricValues(key, value, totalThresholdResult);
+      totalThresholdResult = {
+        ...totalThresholdResult,
+        ...updatedThresholdResult,
+      };
+      if (displayThreshold) {
+        allThresholds.push(displayThreshold);
       }
+      counterMetrics.push(metric);
+    } else if (value.type === MetricsType.TREND) {
+      const { updatedThresholdResult, displayThreshold, metric } =
+        handleMetricValues(key, value, totalThresholdResult);
+      totalThresholdResult = {
+        ...totalThresholdResult,
+        ...updatedThresholdResult,
+      };
+      if (displayThreshold) {
+        allThresholds.push(displayThreshold);
+      }
+      trendMetrics.push(metric);
+    } else if (key === "checks") {
+      const { updatedThresholdResult, displayThreshold, metric } =
+        handleMetricValues(key, value, totalThresholdResult);
+      totalThresholdResult = {
+        ...totalThresholdResult,
+        ...updatedThresholdResult,
+      };
+      if (displayThreshold) {
+        allThresholds.push(displayThreshold);
+      }
+      checkMetric = metric;
+    } else if (value.type === MetricsType.GAUGE) {
+      const { updatedThresholdResult, displayThreshold, metric } =
+        handleMetricValues(key, value, totalThresholdResult);
+      totalThresholdResult = {
+        ...totalThresholdResult,
+        ...updatedThresholdResult,
+      };
+      if (displayThreshold) {
+        allThresholds.push(displayThreshold);
+      }
+      gaugeMetrics.push(metric);
+    } else if (value.type === MetricsType.RATE && key !== "checks") {
+      const { updatedThresholdResult, displayThreshold, metric } =
+        handleMetricValues(key, value, totalThresholdResult);
+      totalThresholdResult = {
+        ...totalThresholdResult,
+        ...updatedThresholdResult,
+      };
+      if (displayThreshold) {
+        allThresholds.push(displayThreshold);
+      }
+      rateMetrics.push(metric);
     }
-  );
-  return { checkMetric, counterMetrics, trendMetrics, gaugeMetrics, rateMetrics, allThresholds, totalThresholdResult }
+  });
+  return {
+    checkMetric,
+    counterMetrics,
+    trendMetrics,
+    gaugeMetrics,
+    rateMetrics,
+    allThresholds,
+    totalThresholdResult,
+  };
 }
 
-function handleMetricValues(key: string, value: any, currentTotalThresholdResult: DisplayTotalThresholdResult) {
+function handleMetricValues(
+  key: string,
+  value: any,
+  currentTotalThresholdResult: DisplayTotalThresholdResult
+) {
   const metric = {
     name: key,
     ...value,
-    thresholdFailed: undefined
+    thresholdFailed: undefined,
   };
 
-  const updatedThresholdResult = { ...currentTotalThresholdResult }
+  const updatedThresholdResult = { ...currentTotalThresholdResult };
 
   if (value.thresholds) {
     const [passes, fails] = thresholdResult(value.thresholds);
 
-    if (fails > 0 && key !== 'checks') {
+    if (fails > 0 && key !== "checks") {
       updatedThresholdResult.failedMetricsNum++;
     }
     updatedThresholdResult.passes += passes;
@@ -138,18 +180,20 @@ function handleMetricValues(key: string, value: any, currentTotalThresholdResult
     return {
       displayThreshold: {
         name: key,
-        thresholds: value.thresholds
-      }, updatedThresholdResult, metric
-    }
+        thresholds: value.thresholds,
+      },
+      updatedThresholdResult,
+      metric,
+    };
   }
 
-  return { updatedThresholdResult, metric }
+  return { updatedThresholdResult, metric };
 }
 
 function thresholdResult(thresholds: Object | undefined) {
   if (thresholds) {
     const thresholdArr = Object.values(thresholds);
-    const passes = thresholdArr.filter(value => value.ok === true).length;
+    const passes = thresholdArr.filter((value) => value.ok === true).length;
     const fails = thresholdArr.length - passes;
     return [passes, fails];
   }
@@ -168,7 +212,7 @@ function getChecks(data: any) {
     if (data.checks.length > 0) {
       Object.values(data.checks).forEach((value) => {
         checksOutput.push(value);
-      })
+      });
     }
 
     for (let item in data.groups) {

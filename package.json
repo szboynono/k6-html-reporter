@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "dev": "tsc && cd dev && node index.js",
+    "dev": "rm -rf dist && tsc && cd dev && node index.js",
     "start": "ts-node src/index.ts",
     "test": "jest"
   },
