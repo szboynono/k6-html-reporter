@@ -2,7 +2,7 @@
 
 A light weight html reporter for k6
 
-[![Build Status](https://travis-ci.com/szboynono/k6-html-reporter.svg?branch=main)](https://travis-ci.com/szboynono/k6-html-reporter) [![Generic badge](https://img.shields.io/badge/version-1.0.3-<COLOR>.svg)](https://shields.io/)
+[![Build Status](https://travis-ci.com/szboynono/k6-html-reporter.svg?branch=main)](https://travis-ci.com/szboynono/k6-html-reporter) [![Generic badge](https://img.shields.io/badge/version-1.0.5-<COLOR>.svg)](https://shields.io/)
 
 
 ## Install
